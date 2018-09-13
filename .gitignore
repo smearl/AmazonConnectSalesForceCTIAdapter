@@ -1,0 +1,12 @@
+.idea
+.sfdx
+.vs
+.vscode
+IlluminatedCloud
+mdapioutput
+force-app/main/default/layouts/Event-Event Layout.layout-meta.xml
+force-app/main/default/layouts/Task-Task Layout.layout-meta.xml
+force-app/main/default/profiles/Admin.profile-meta.xml
+force-app/main/default/cachePartitions/OrgCache.cachePartition-meta.xml
+force-app/main/default/profiles/Trial Customer Portal User.profile-meta.xml
+force-app/main/default/layouts/Account-Account Layout.layout-meta.xml

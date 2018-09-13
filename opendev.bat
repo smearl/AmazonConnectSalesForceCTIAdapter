@@ -1,0 +1,3 @@
+@echo off
+@echo Open dev org...
+sfdx force:org:open -u whitewalker
