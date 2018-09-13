@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CCP_Attribute_Label__c</fullName>
+    <description>The label to be used in the CCP display.</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Please provide the label for this attribute as it will be shown in the display within CCP. Ideally, the shorter the name the better it is.</inlineHelpText>
+    <label>CCP Attribute Label</label>
+    <length>25</length>
+    <required>true</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

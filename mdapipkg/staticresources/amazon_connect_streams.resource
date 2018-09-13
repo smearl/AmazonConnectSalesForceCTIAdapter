@@ -3141,8 +3141,8 @@
             }),
 
             CorePost: new SequentialExecutor().addNamedListeners(function(add) {
-                add('EXTRACT_REQUEST_ID', 'extractData', AWS.util.extractRequestId);
-                add('EXTRACT_REQUEST_ID', 'extractError', AWS.util.extractRequestId);
+                add('EXTRACSFCCP_REQUEST_ID', 'extractData', AWS.util.extractRequestId);
+                add('EXTRACSFCCP_REQUEST_ID', 'extractError', AWS.util.extractRequestId);
 
                 add('ENOTFOUND_ERROR', 'httpError', function ENOTFOUND_ERROR(err) {
                     if (err.code === 'NetworkingError' && err.errno === 'ENOTFOUND') {
@@ -3196,36 +3196,36 @@
             Json: new SequentialExecutor().addNamedListeners(function(add) {
                 var svc = require('./protocol/json');
                 add('BUILD', 'build', svc.buildRequest);
-                add('EXTRACT_DATA', 'extractData', svc.extractData);
-                add('EXTRACT_ERROR', 'extractError', svc.extractError);
+                add('EXTRACSFCCP_DATA', 'extractData', svc.extractData);
+                add('EXTRACSFCCP_ERROR', 'extractError', svc.extractError);
             }),
 
             Rest: new SequentialExecutor().addNamedListeners(function(add) {
                 var svc = require('./protocol/rest');
                 add('BUILD', 'build', svc.buildRequest);
-                add('EXTRACT_DATA', 'extractData', svc.extractData);
-                add('EXTRACT_ERROR', 'extractError', svc.extractError);
+                add('EXTRACSFCCP_DATA', 'extractData', svc.extractData);
+                add('EXTRACSFCCP_ERROR', 'extractError', svc.extractError);
             }),
 
             RestJson: new SequentialExecutor().addNamedListeners(function(add) {
                 var svc = require('./protocol/rest_json');
                 add('BUILD', 'build', svc.buildRequest);
-                add('EXTRACT_DATA', 'extractData', svc.extractData);
-                add('EXTRACT_ERROR', 'extractError', svc.extractError);
+                add('EXTRACSFCCP_DATA', 'extractData', svc.extractData);
+                add('EXTRACSFCCP_ERROR', 'extractError', svc.extractError);
             }),
 
             RestXml: new SequentialExecutor().addNamedListeners(function(add) {
                 var svc = require('./protocol/rest_xml');
                 add('BUILD', 'build', svc.buildRequest);
-                add('EXTRACT_DATA', 'extractData', svc.extractData);
-                add('EXTRACT_ERROR', 'extractError', svc.extractError);
+                add('EXTRACSFCCP_DATA', 'extractData', svc.extractData);
+                add('EXTRACSFCCP_ERROR', 'extractError', svc.extractError);
             }),
 
             Query: new SequentialExecutor().addNamedListeners(function(add) {
                 var svc = require('./protocol/query');
                 add('BUILD', 'build', svc.buildRequest);
-                add('EXTRACT_DATA', 'extractData', svc.extractData);
-                add('EXTRACT_ERROR', 'extractError', svc.extractError);
+                add('EXTRACSFCCP_DATA', 'extractData', svc.extractData);
+                add('EXTRACSFCCP_ERROR', 'extractError', svc.extractError);
             })
         };
 
@@ -18132,7 +18132,7 @@
         'routable',
         'not_routable',
         'pending',
-        'contact_pending',
+        'contacsf_pending',
         'offline',
         'error',
         'softphone_error',
@@ -19293,7 +19293,7 @@
     ]);
     connect.ContactStatusType = connect.ContactStateType;
 
-    connect.CONTACT_ACTIVE_STATES = connect.makeEnum([
+    connect.CONTACSFCCP_ACTIVE_STATES = connect.makeEnum([
         'incoming',
         'connecting',
         'connected'
@@ -19366,7 +19366,7 @@
 
     Agent.prototype.onContactPending = function(f) {
         var bus = connect.core.getEventBus();
-        bus.subscribe(connect.AgentEvents.CONTACT_PENDING, f);
+        bus.subscribe(connect.AgentEvents.CONTACSFCCP_PENDING, f);
     };
 
     Agent.prototype.onRefresh = function(f) {
@@ -19783,7 +19783,7 @@
 
     Contact.prototype.notifyIssue = function(issueCode, description, callbacks) {
         var client = connect.core.getClient();
-        client.call(connect.ClientMethods.NOTIFY_CONTACT_ISSUE, {
+        client.call(connect.ClientMethods.NOTIFY_CONTACSFCCP_ISSUE, {
             contactId:     this.getContactId(),
             issueCode:     issueCode,
             description:   description
@@ -20344,7 +20344,7 @@
 
 
         connect.agent(function(agent) {
-            // Sync mute across all tabs 
+            // Sync mute across all tabs
             if(agent.isSoftphoneEnabled()){
                 connect.core.getUpstream().sendUpstream(connect.EventType.BROADCAST,
                     {
@@ -20831,8 +20831,8 @@
         .assoc(connect.EventGraph.ANY,
             connect.ContactStateType.ENDED,
             connect.ContactEvents.ACW)
-        .assoc(connect.values(connect.CONTACT_ACTIVE_STATES),
-            connect.values(connect.relativeComplement(connect.CONTACT_ACTIVE_STATES, connect.ContactStateType)),
+        .assoc(connect.values(connect.CONTACSFCCP_ACTIVE_STATES),
+            connect.values(connect.relativeComplement(connect.CONTACSFCCP_ACTIVE_STATES, connect.ContactStateType)),
             connect.ContactEvents.ENDED);
 
     /**-----------------------------------------------------------------------*/
@@ -21282,7 +21282,7 @@
 
         connect.contact(onInitContact);
 
-        // Contact already in connecting state scenario - In this case contact INIT is missed hence the OnRefresh callback is missed. 
+        // Contact already in connecting state scenario - In this case contact INIT is missed hence the OnRefresh callback is missed.
         new connect.Agent().getContacts().forEach(function(contact){
             var agentConnectionId = contact.getAgentConnection().connectionId;
             logger.info("Contact exist in the snapshot. Reinitiate the Contact and RTC session creation for contactId" + contact.getContactId(), "agent connectionId " + agentConnectionId);
@@ -21332,7 +21332,7 @@
     };
 
     // Check for the local streams if exists  -  revert it
-    // And inform other clients about the change 
+    // And inform other clients about the change
     var muteToggle = function(data){
         var status;
         if(connect.keys(localMediaStream).length === 0){

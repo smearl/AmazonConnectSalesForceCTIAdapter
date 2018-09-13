@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Attribute_Name__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <description>The name of the attribute as it is configured in Amazon Connect.</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Please provide the name of the attribute as it is configured in Amazon Connect&#39;s Call Flow.</inlineHelpText>
+    <label>Amazon Connect Attribute Name</label>
+    <length>50</length>
+    <required>true</required>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>ACSFCCP_Browser_not_supported</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Used in the audio player if the browser doesn't support html 5</shortDescription>
+        <value>Your browser does not support this call recording widget.</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_CallAttributeKey</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Header for the key of the call attribute popup</shortDescription>
+        <value>Attribute</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_CallAttributeValue</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Header for the value of the call attribute popup</shortDescription>
+        <value>Value</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_Call_Date_Header</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Call Date Header</shortDescription>
+        <value>Call Date</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_Call_Duration_Header</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Call Duration Header</shortDescription>
+        <value>Phone Call Duration</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_Call_Identifier_Header</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Call Identifier Header</shortDescription>
+        <value>Call Identifier</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_Call_Transcript_Header</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Call Transcript Header</shortDescription>
+        <value>Call_Transcript</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_Call_Type_Header</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Call Type Header</shortDescription>
+        <value>Call Type</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_Error_text_for_audio_message</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error text that is displayed if the audio file has an issue loading on the task</shortDescription>
+        <value>Error Retrieving recording. Please Make sure you are logged into a valid Amazon Connect phone session.</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_Minutes_in_Call_View</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Minutes in Call View</shortDescription>
+        <value>min</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_Phone_Number_Header</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Phone Number Header</shortDescription>
+        <value>Phone Number</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_PostCallTaskTabName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ACSFCCP_PostCallTaskTabName</shortDescription>
+        <value>Call Wrap-up</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_Seconds_in_Call_View</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Seconds in Call View</shortDescription>
+        <value>sec</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_Store_Call_Information</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>alt text that is shown when hover over button</shortDescription>
+        <value>Click to store current tabs for call transfer.</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_Task_successfully_saved</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Task successfully saved</shortDescription>
+        <value>Task saved successfully!</value>
+    </labels>
+</CustomLabels>

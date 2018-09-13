@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Quality_Score_Above_50__c</fullName>
+    <externalId>false</externalId>
+    <formula>Quality_Score__c >=  50</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Quality Score Above 50?</label>
+    <type>Checkbox</type>
+</CustomField>

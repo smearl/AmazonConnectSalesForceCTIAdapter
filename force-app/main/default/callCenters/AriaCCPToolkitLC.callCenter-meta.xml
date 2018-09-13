@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CallCenter xmlns="http://soap.sforce.com/2006/04/metadata">
+    <adapterUrl>/apex/ACSFCCP_Lightning</adapterUrl>
+    <customSettings>{"reqSoftphoneHeight":"400","reqUseApi":"true","reqSoftphoneWidth":"250","reqSalesforceCompatibilityMode":"Lightning"}</customSettings>
+    <displayName>Toolkit for Amazon Connect - Lightning</displayName>
+    <displayNameLabel>Display Name</displayNameLabel>
+    <internalNameLabel>Internal Name</internalNameLabel>
+    <sections>
+        <items>
+            <label>Description</label>
+            <name>reqDescription</name>
+            <value>Amazon Connect Call Center</value>
+        </items>
+        <items>
+            <label>CTI Adapter URL</label>
+            <name>reqAdapterUrl</name>
+            <value>/apex/ACSFCCP_Lightning</value>
+        </items>
+        <items>
+            <label>Use CTI API</label>
+            <name>reqUseApi</name>
+            <value>true</value>
+        </items>
+        <items>
+            <label>Softphone Height</label>
+            <name>reqSoftphoneHeight</name>
+            <value>400</value>
+        </items>
+        <items>
+            <label>Softphone Width</label>
+            <name>reqSoftphoneWidth</name>
+            <value>250</value>
+        </items>
+        <items>
+            <label>Salesforce Compatibility Mode</label>
+            <name>reqSalesforceCompatibilityMode</name>
+            <value>Lightning</value>
+        </items>
+        <label>Amazon Connect Salesforce CCP Adapter</label>
+        <name>reqGeneralInfo</name>
+    </sections>
+    <sections>
+        <items>
+            <label>Amazon Connect CCP URL</label>
+            <name>reqConnectURL</name>
+            <value>https://wfamzsfdc.awsapps.com/connect/ccp</value>
+        </items>
+        <items>
+            <label>Console Phone Width</label>
+            <name>reqConnectCW</name>
+            <value>260</value>
+        </items>
+        <items>
+            <label>Console Phone Height</label>
+            <name>reqConnectCH</name>
+            <value>465</value>
+        </items>
+        <items>
+            <label>Classic Phone Width</label>
+            <name>reqConnectCLCW</name>
+            <value>195</value>
+        </items>
+        <items>
+            <label>Classic Phone Height</label>
+            <name>reqConnectCLCH</name>
+            <value>460</value>
+        </items>
+        <items>
+            <label>Lightning Container Width</label>
+            <name>reqConnectLW</name>
+            <value>260</value>
+        </items>
+        <items>
+            <label>Lightning Container Height</label>
+            <name>reqConnectLH</name>
+            <value>465</value>
+        </items>
+        <items>
+            <label>Lightning Phone Width</label>
+            <name>reqConnectLCW</name>
+            <value>266</value>
+        </items>
+        <items>
+            <label>Lightning Phone Height</label>
+            <name>reqConnectLCH</name>
+            <value>512</value>
+        </items>
+        <items>
+            <label>Phone Number Formatting</label>
+            <name>reqConnectPhoneFormat</name>
+            <value>{"OPF":"0","NPF":"1","Country":"US","NF":"International_plaintext","TNF":"(555) 123-4567"}</value>
+        </items>
+        <label>Amazon Connect Information</label>
+        <name>reqConnectSFCCPOptions</name>
+    </sections>
+</CallCenter>
