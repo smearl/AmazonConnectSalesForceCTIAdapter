@@ -1,4 +1,4 @@
-/** Copyright 2018 Aria Solutions Inc.
+/**
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -13,10 +13,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-global class ACT_NamespaceController {
+global class ACSFCCP_NamespaceController {
 
   global String getNamespaceClassPrefix() {
-    return ACT_NamespaceController.class.getName().substringBefore('ACT_NamespaceController');
+    return ACSFCCP_NamespaceController.class.getName().substringBefore('ACSFCCP_NamespaceController');
   }
 
   global String getNamespacePagePrefix() {

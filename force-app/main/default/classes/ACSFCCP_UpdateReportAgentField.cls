@@ -1,4 +1,4 @@
-/** Copyright 2018 Aria Solutions Inc.
+/**
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -13,13 +13,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-public class ACT_UpdateReportAgentField {
+public class ACSFCCP_UpdateReportAgentField {
 
-  public static void linkToSalesforceUser(List<ACT_HistoricalReportData__c> records) {
+  public static void linkToSalesforceUser(List<ACSFCCP_HistoricalReportData__c> records) {
 
     Map<String, Id> connectUsers = getConnectUsers();
 
-    for (ACT_HistoricalReportData__c rec : records) {
+    for (ACSFCCP_HistoricalReportData__c rec : records) {
       if (rec.Type__c == 'Agent' && connectUsers.containsKey(rec.AC_Object_Name__c)) {
         rec.Agent__c = connectUsers.get(rec.AC_Object_Name__c);
       }

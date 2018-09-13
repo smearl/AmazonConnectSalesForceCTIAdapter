@@ -1,4 +1,4 @@
-/** Copyright 2018 Aria Solutions Inc.
+/**
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -13,13 +13,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-public with sharing class ACT_PostCallUpdateTaskLookupsController {
+public with sharing class ACSFCCP_PostCallUpdateTaskLookupsController {
 
-  public ACT_PostCallUpdateTaskLookupsController(ApexPages.StandardController stdController) { }
+  public ACSFCCP_PostCallUpdateTaskLookupsController(ApexPages.StandardController stdController) { }
 
   public List<SelectOption> getDispositionCodes() {
     List<SelectOption> dispositionCodes = new List<SelectOption>();
-    for(ACT_Call_Disposition_Code__mdt dc: [SELECT DeveloperName, MasterLabel, Disposition_Code__c FROM ACT_Call_Disposition_Code__mdt WHERE Active__c = true ORDER BY DeveloperName ASC]) {
+    for(ACSFCCP_Call_Disposition_Code__mdt dc: [SELECT DeveloperName, MasterLabel, Disposition_Code__c FROM ACSFCCP_Call_Disposition_Code__mdt WHERE Active__c = true ORDER BY DeveloperName ASC]) {
       dispositionCodes.add(new SelectOption(dc.Disposition_Code__c, dc.MasterLabel));
     }
 

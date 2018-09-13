@@ -1,4 +1,4 @@
-/** Copyright 2018 Aria Solutions Inc.
+/**
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -13,12 +13,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-global with sharing class ACT_CallInformationController {
+global with sharing class ACSFCCP_CallInformationController {
   public static final String CACHE_PARTITION_PREFIX = 'ACTCallInfo';
   public static final String CACHE_TEST_KEY = 'TESTKEY';
   public static final String CACHE_TEST_VALUE = 'TEST-VALUE';
 
-  public ACT_CallInformationController(ACT_NamespaceController controller) { }
+  public ACSFCCP_CallInformationController(ACSFCCP_NamespaceController controller) { }
 
   @RemoteAction
   global static Boolean isPlatformCacheAvailable() {

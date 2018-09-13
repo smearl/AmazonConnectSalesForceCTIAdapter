@@ -1,4 +1,4 @@
-/** Copyright 2018 Aria Solutions Inc.
+/**
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -13,11 +13,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-public with sharing class ACT_CallLogging_ViewExt {
+public with sharing class ACSFCCP_CallLogging_ViewExt {
 
 	private FINAL String acctId;
 
-	public ACT_CallLogging_ViewExt(ApexPages.StandardController ctrl){
+	public ACSFCCP_CallLogging_ViewExt(ApexPages.StandardController ctrl){
 		acctId = ctrl.getId();
 	}
 
