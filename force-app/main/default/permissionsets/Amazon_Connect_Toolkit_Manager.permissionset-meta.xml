@@ -63,7 +63,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>ACSFCCP_HistoricalReportData__c.Average_outbound_after_contacsf_work_time__c</field>
+        <field>ACSFCCP_HistoricalReportData__c.Average_outbound_after_contact_work_time__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

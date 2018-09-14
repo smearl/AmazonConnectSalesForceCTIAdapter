@@ -13,9 +13,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-public with sharing class ACSFCCP_PostCallUpdateTaskLookupsController {
+public with sharing class ACSFCCP_PostCallUpdateTaskController {
 
-  public ACSFCCP_PostCallUpdateTaskLookupsController(ApexPages.StandardController stdController) { }
+  public ACSFCCP_PostCallUpdateTaskController(ApexPages.StandardController stdController) { }
 
   public List<SelectOption> getDispositionCodes() {
     List<SelectOption> dispositionCodes = new List<SelectOption>();
