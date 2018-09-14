@@ -1,3 +1,43 @@
+<<<<<<< HEAD
+<!--
+    new console page from VF
+-->
+<apex:page id="ACSFCCP_Console" showHeader="false" controller="ACSFCCP_NamespaceController" extensions="ACSFCCP_CallInformationController">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+
+    <apex:slds />
+
+    <apex:remoteObjects>
+        <apex:remoteObjectModel name="ServicePresenceStatus" fields="Id, DeveloperName, MasterLabel" />
+
+        <apex:remoteObjectModel name="Call_Attributes_Configuration__mdt" fields="Id" jsShorthand="Call_Attributes_Configuration">
+            <apex:remoteObjectField name="Attribute_Name__c" jsShorthand="Attribute_Name" />
+            <apex:remoteObjectField name="CCP_Attribute_Label__c" jsShorthand="CCP_Attribute_Label" />
+        </apex:remoteObjectModel>
+
+        <apex:remoteObjectModel name="Call_Campaign__c" fields="Id" jsShorthand="Call_Campaign">
+            <apex:remoteObjectField name="Phone_Number__c" jsShorthand="Phone_Number" />
+            <apex:remoteObjectField name="Account__c" jsShorthand="Account" />
+            <apex:remoteObjectField name="Contacsf__c" jsShorthand="Contact" />
+            <apex:remoteObjectField name="Lead__c" jsShorthand="Lead" />
+            <apex:remoteObjectField name="Opportunity__c" jsShorthand="Opportunity" />
+            <apex:remoteObjectField name="Case__c" jsShorthand="Case" />
+        </apex:remoteObjectModel>
+    </apex:remoteObjects>
+
+    <apex:includeScript value="/support/api/40.0/interaction.js" />
+    <!-- <apex:includeScript value="//cticm.chrysalis.net/scripts/interaction.js"/> -->
+    <apex:includeScript value="/support/console/40.0/integration.js" />
+    <apex:includeScript value="{!$Resource.amazonconnect__amazonconnectjs121}" />
+    <apex:includeScript value="{!$Resource.amazonconnect__libphonenumberjs}" />
+    <apex:includeScript value="{!$Resource.acsf_callattributesdisplay}" />
+    <apex:includeScript value="{!$Resource.acsf_omnipresencesync}" />
+    <apex:includeScript value="{!$Resource.acsf_postcalltask}" />
+    <apex:includeScript value="{!$Resource.acsf_autocallcampaign}" />
+    <apex:includeScript value="{!$Resource.acsf_callinformation}" />
+    <apex:includeScript value="{!$Resource.acsf_screenpopmanager}" />
+
+=======
 <!--  You must have an AWS account to use the Amazon Connect CTI Adapter.
 Downloading and/or using the Amazon Connect CTI Adapter is subject to the terms of the AWS Customer Agreement,
 AWS Service Terms, and AWS Privacy Notice.
@@ -65,6 +105,7 @@ WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEM
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
+
 <apex:page id="ACSFCCP_Console" showHeader="false" controller="ACSFCCP_NamespaceController" extensions="ACSFCCP_CallInformationController">
     <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
 
@@ -87,9 +128,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <apex:remoteObjectField name="Case__c" jsShorthand="Case" />
         </apex:remoteObjectModel>
     </apex:remoteObjects>
-            <apex:remoteObjectField name="Case__c" jsShorthand="Case" />
-        </apex:remoteObjectModel>
-    </apex:remoteObjects>
 
     <apex:includeScript value="/support/api/40.0/interaction.js" />
     <!-- <apex:includeScript value="//cticm.chrysalis.net/scripts/interaction.js"/> -->
@@ -103,6 +141,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <apex:includeScript value="{!$Resource.acsf_callinformation}" />
     <apex:includeScript value="{!$Resource.acsf_screenpopmanager}" />
 
+>>>>>>> 930f5d6ec892c07c5cac77fba8a5d5fde8950e11
     <style>
         body {
             background-color: #F2F2F2;
@@ -221,6 +260,10 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             var connectMedialess = false;
             var connectLoginPopup = false;
             var connectAutoClose = false;
+<<<<<<< HEAD
+=======
+            var connectAutoLogin = 0;
+>>>>>>> 930f5d6ec892c07c5cac77fba8a5d5fde8950e11
 
             var loadACSFIntegration = function () {
                 ctx.ACSFIntegration.OmniPresenceSync.onAgentHandler();
@@ -245,11 +288,19 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
                 //begin change to support SSO
                 /*
+<<<<<<< HEAD
                 document.getElementById('loginButton').addEventListener('click', function () {
                 loginWindow = window.open(ccpUrl, 'AmazonConnectLoginWindow', 'width=400, height=520');
                 });
                  */
                 document.getElementById('loginButton').addEventListener('click', function () {
+=======
+                document.getElementById('loginButton').addEventListener('click', function () {
+                loginWindow = window.open(ccpUrl, 'AmazonConnectLoginWindow', 'width=400, height=520');
+                });
+                 */
+                document.getElementById('loginButton').addEventListener('click', function () {
+>>>>>>> 930f5d6ec892c07c5cac77fba8a5d5fde8950e11
                     if (connectLoginPopup) {
                         loginWindow = window.open(ccpUrl, 'AmazonConnectLoginWindow', 'width=400, height=520');
                     }
@@ -314,11 +365,17 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 connectMedialess = ccSettings["/reqConnectSFCCPOptions/reqConnectMedialess"] == 'true' ? true : false;
                 connectLoginPopup = ccSettings["/reqConnectSFCCPOptions/reqConnectLoginPopup"] == 'true' ? true : false;
                 connectAutoClose = ccSettings["/reqConnectSFCCPOptions/reqConnectAutoClose"] == 'true' ? true : false;
+<<<<<<< HEAD
+=======
+
+                connectAutoLogin = ccSettings["/reqConnectSFCCPOptions/reqConnectAutoLogin"];
+                    connectAutoLogin = parseInt(connectAutoLogin);
+                    if(connectAutoLogin > 0) connectAutoLogin = connectAutoLogin * 1000;
+>>>>>>> 930f5d6ec892c07c5cac77fba8a5d5fde8950e11
                 //end additions for SSO
 
                 connectCW = (isInConsole ? ccSettings["/reqConnectSFCCPOptions/reqConnectCW"] : ccSettings["/reqConnectSFCCPOptions/reqConnectCLCW"]) + "px";
                 connectCH = (isInConsole ? ccSettings["/reqConnectSFCCPOptions/reqConnectCH"] : ccSettings["/reqConnectSFCCPOptions/reqConnectCLCH"]) + "px";
-                //end additions for SSO
                 connectPhoneFormat = JSON.parse(ccSettings["/reqConnectSFCCPOptions/reqConnectPhoneFormat"]);
                 connect.getLog().info("ConnectSFCCP:cbInConsole:JSContainer:Prefix:" + connectPhoneFormat.OPF + "|" + connectPhoneFormat.NPF + "|"
                     + connectPhoneFormat.Country + "|" + connectPhoneFormat.NF + "|" + connectPhoneFormat.TNF);
@@ -335,9 +392,15 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 connect.core.initCCP(container, {
                     ccpUrl: connectURL,
                     loginPopup: false,
+<<<<<<< HEAD
                     /*  softphone: {
                          allowFramedSoftphone: true,
                      } */
+=======
+                   /*  softphone: {
+                        allowFramedSoftphone: true,
+                    } */
+>>>>>>> 930f5d6ec892c07c5cac77fba8a5d5fde8950e11
                     softphone: {
                         allowFramedSoftphone: !connectMedialess,
                     }
@@ -402,6 +465,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                             }
                         }
                         sforce.interaction.cti.onClickToDial(onClickListener);
+<<<<<<< HEAD
+=======
 
                         onSoftphoneLoginSuccessful();
                     } catch (e) {
@@ -434,12 +499,41 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                         setTimeout( function () {
                             if(connectAutoLogin >= 1000) document.getElementById('loginButton').click();
                         }, connectAutoLogin )
+>>>>>>> 930f5d6ec892c07c5cac77fba8a5d5fde8950e11
 
+                        onSoftphoneLoginSuccessful();
+                    } catch (e) {
+                        connect.getLog().error("ConnectSFCCP:cbInConsole:Agent:Error:").withException(e);
                     }
+                });
+
+<<<<<<< HEAD
+                connect.getLog().info("ConnectSFCCP:cbInConsole:CTD");
+                connect.agent(function (agent) {
+                    try {
+                        var aPermissions = agent.getPermissions();
+                        connect.getLog().info("ConnectSFCCP:GP:" + aPermissions);
+                        if (aPermissions == "outboundCall") {
+                            sforce.interaction.cti.enableClickToDial(cbClickToDial);
+                        }
+                    }
+                    catch (e) {
+                        connect.getLog().error("ConnectSFCCP:GP::Error:").withException(e);
+                    }
+
+                });
+                connect.getLog().info("ConnectSFCCP:cbInConsole:SFHW");
+                sforce.interaction.cti.setSoftphoneWidth(connectCW, cbWidthSet);
+                sforce.interaction.cti.setSoftphoneHeight(connectCH, cbHeightSet);
 
                 loadACSFIntegration();
             };
 
+=======
+                loadACSFIntegration();
+            };
+
+>>>>>>> 930f5d6ec892c07c5cac77fba8a5d5fde8950e11
             var cbCCSettings = function (response) {
                 if (response.result) {
                     connect.getLog().info("ConnectSFCCP:cbCCSettings:OK:" + response.result);
