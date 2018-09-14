@@ -22,5 +22,5 @@
         <members>libphonenumberjs</members>
         <name>StaticResource</name>
     </types>
-    <version>43.0</version>
+    <version>41.0</version>
 </Package>
