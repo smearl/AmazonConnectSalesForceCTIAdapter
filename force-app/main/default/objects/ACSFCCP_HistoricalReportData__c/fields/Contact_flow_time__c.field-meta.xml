@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Contacsf_flow_time__c</fullName>
+    <fullName>Contact_flow_time__c</fullName>
     <externalId>false</externalId>
     <label>Contact flow time</label>
     <precision>18</precision>

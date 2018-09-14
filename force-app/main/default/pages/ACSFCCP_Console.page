@@ -82,16 +82,17 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <apex:remoteObjectModel name="Call_Campaign__c" fields="Id" jsShorthand="Call_Campaign">
             <apex:remoteObjectField name="Phone_Number__c" jsShorthand="Phone_Number" />
             <apex:remoteObjectField name="Account__c" jsShorthand="Account" />
-            <apex:remoteObjectField name="Contacsf__c" jsShorthand="Contact" />
+            <apex:remoteObjectField name="Contact__c" jsShorthand="Contact" />
             <apex:remoteObjectField name="Lead__c" jsShorthand="Lead" />
             <apex:remoteObjectField name="Opportunity__c" jsShorthand="Opportunity" />
             <apex:remoteObjectField name="Case__c" jsShorthand="Case" />
         </apex:remoteObjectModel>
     </apex:remoteObjects>
+<!--
     <apex:remoteObjectField name="Case__c" jsShorthand="Case" />
     </apex:remoteObjectModel>
     </apex:remoteObjects>
-
+ -->
     <apex:includeScript value="/support/api/40.0/interaction.js" />
     <!-- <apex:includeScript value="//cticm.chrysalis.net/scripts/interaction.js"/> -->
     <apex:includeScript value="/support/console/40.0/integration.js" />

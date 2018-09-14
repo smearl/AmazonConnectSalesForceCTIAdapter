@@ -15,5 +15,5 @@ limitations under the License.
  -->
 
 <apex:page id="ACSFCCP_CallRecording" standardController="Case" showHeader="false" sideBar="false" docType="html-5.0">
-  <c:ACSFCCP_CallRecordingLink contactId="{!Case.AC_Contacsf_Id__c}" />
+  <c:ACSFCCP_CallRecordingLink contactId="{!Case.AC_Contact_Id__c}" />
 </apex:page>

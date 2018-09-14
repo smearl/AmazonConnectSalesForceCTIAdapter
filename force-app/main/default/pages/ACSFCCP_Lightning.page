@@ -50,7 +50,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
         <apex:remoteObjectModel name="Call_Campaign__c" fields="Id" jsShorthand="Call_Campaign">
             <apex:remoteObjectField name="Phone_Number__c" jsShorthand="Phone_Number" />
             <apex:remoteObjectField name="Account__c" jsShorthand="Account" />
-            <apex:remoteObjectField name="Contacsf__c" jsShorthand="Contact" />
+            <apex:remoteObjectField name="Contact__c" jsShorthand="Contact" />
             <apex:remoteObjectField name="Lead__c" jsShorthand="Lead" />
             <apex:remoteObjectField name="Opportunity__c" jsShorthand="Opportunity" />
             <apex:remoteObjectField name="Case__c" jsShorthand="Case" />
