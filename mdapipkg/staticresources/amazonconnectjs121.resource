@@ -18090,7 +18090,7 @@
         'routable',
         'not_routable',
         'pending',
-        'contacsf_pending',
+        'contact_pending',
         'offline',
         'error',
         'softphone_error',

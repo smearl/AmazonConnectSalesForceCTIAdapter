@@ -28,11 +28,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>After_contacsf_work_time__c</field>
+                <field>After_contact_work_time__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Agent_on_contacsf_time__c</field>
+                <field>Agent_on_contact_time__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -48,7 +48,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Average_after_contacsf_work_time__c</field>
+                <field>Average_after_contact_work_time__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

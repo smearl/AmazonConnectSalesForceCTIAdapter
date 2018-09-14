@@ -131,7 +131,7 @@ limitations under the License.
       var taskId  = response.result || response.returnValue.recordId;
 
       connect.getLog().info("ACSFIntegration:PostCallTask:createTask task saved. Id=" + taskId);
-      var taskURL = "/apex/" + _namespacePrefix + "ACSFCCP_PostCallUpdateTaskLookups?id=" + taskId;
+      var taskURL = "/apex/" + _namespacePrefix + "ACSFCCP_PostCallUpdateTask?id=" + taskId;
 
       if (sforce.console) {
         // Classic Console

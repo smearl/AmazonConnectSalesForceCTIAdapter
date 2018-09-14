@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>List of call dispositions, which an agent can choose to wrap up a customer call.</description>
+    <label>Call Disposition Code</label>
+    <pluralLabel>Call Disposition Codes</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

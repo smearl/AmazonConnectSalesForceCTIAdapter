@@ -8,7 +8,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>ACSFCCP_HistoricalReportData__c.After_contacsf_work_time__c</field>
+        <field>ACSFCCP_HistoricalReportData__c.After_contact_work_time__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -38,12 +38,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>ACSFCCP_HistoricalReportData__c.Agent_on_contacsf_time__c</field>
+        <field>ACSFCCP_HistoricalReportData__c.Agent_on_contact_time__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>ACSFCCP_HistoricalReportData__c.Average_after_contacsf_work_time__c</field>
+        <field>ACSFCCP_HistoricalReportData__c.Average_after_contact_work_time__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -63,7 +63,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>ACSFCCP_HistoricalReportData__c.Average_outbound_after_contacsf_work_time__c</field>
+        <field>ACSFCCP_HistoricalReportData__c.Average_outbound_after_contact_work_time__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -88,12 +88,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>ACSFCCP_HistoricalReportData__c.Contacsf_flow_time__c</field>
+        <field>ACSFCCP_HistoricalReportData__c.Contact_flow_time__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>ACSFCCP_HistoricalReportData__c.Contacsf_handle_time__c</field>
+        <field>ACSFCCP_HistoricalReportData__c.Contact_handle_time__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

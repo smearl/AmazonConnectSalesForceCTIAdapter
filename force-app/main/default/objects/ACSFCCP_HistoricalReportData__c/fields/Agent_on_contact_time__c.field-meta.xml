@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Agent_on_contacsf_time__c</fullName>
+    <fullName>Agent_on_contact_time__c</fullName>
     <externalId>false</externalId>
     <label>Agent on contact time</label>
     <precision>18</precision>

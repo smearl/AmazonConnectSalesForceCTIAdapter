@@ -3,6 +3,7 @@ Downloading and/or using the Amazon Connect CTI Adapter is subject to the terms 
 AWS Service Terms, and AWS Privacy Notice.
 
 © 2017, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+Copyright (c) Aria Solutions 2018
 
 NOTE:  Other license terms may apply to certain, identified software components
 contained within or distributed with the Amazon Connect CTI Adapter if such terms are
@@ -81,21 +82,22 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
         <apex:remoteObjectModel name="Call_Campaign__c" fields="Id" jsShorthand="Call_Campaign">
             <apex:remoteObjectField name="Phone_Number__c" jsShorthand="Phone_Number" />
             <apex:remoteObjectField name="Account__c" jsShorthand="Account" />
-            <apex:remoteObjectField name="Contacsf__c" jsShorthand="Contact" />
+            <apex:remoteObjectField name="Contact__c" jsShorthand="Contact" />
             <apex:remoteObjectField name="Lead__c" jsShorthand="Lead" />
             <apex:remoteObjectField name="Opportunity__c" jsShorthand="Opportunity" />
             <apex:remoteObjectField name="Case__c" jsShorthand="Case" />
         </apex:remoteObjectModel>
     </apex:remoteObjects>
-            <apex:remoteObjectField name="Case__c" jsShorthand="Case" />
-        </apex:remoteObjectModel>
+<!--
+    <apex:remoteObjectField name="Case__c" jsShorthand="Case" />
+    </apex:remoteObjectModel>
     </apex:remoteObjects>
-
+ -->
     <apex:includeScript value="/support/api/40.0/interaction.js" />
     <!-- <apex:includeScript value="//cticm.chrysalis.net/scripts/interaction.js"/> -->
     <apex:includeScript value="/support/console/40.0/integration.js" />
-    <apex:includeScript value="{!$Resource.amazonconnect__amazonconnectjs121}" />
-    <apex:includeScript value="{!$Resource.amazonconnect__libphonenumberjs}" />
+    <apex:includeScript value="{!$Resource.amazonconnectjs121}" />
+    <apex:includeScript value="{!$Resource.libphonenumberjs}" />
     <apex:includeScript value="{!$Resource.acsf_callattributesdisplay}" />
     <apex:includeScript value="{!$Resource.acsf_omnipresencesync}" />
     <apex:includeScript value="{!$Resource.acsf_postcalltask}" />
@@ -221,6 +223,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             var connectMedialess = false;
             var connectLoginPopup = false;
             var connectAutoClose = false;
+            var connectAutoLogin = 0;
 
             var loadACSFIntegration = function () {
                 ctx.ACSFIntegration.OmniPresenceSync.onAgentHandler();
@@ -265,6 +268,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
             var onSoftphoneLoginSuccessful = function () {
                 connect.getLog().info("ConnectSFCCP:onSoftphoneLoginSuccessful invoked");
+                connectAutoLogin = 0;
                 showSoftphone();
 
                 //if (loginWindow) {
@@ -314,6 +318,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 connectMedialess = ccSettings["/reqConnectSFCCPOptions/reqConnectMedialess"] == 'true' ? true : false;
                 connectLoginPopup = ccSettings["/reqConnectSFCCPOptions/reqConnectLoginPopup"] == 'true' ? true : false;
                 connectAutoClose = ccSettings["/reqConnectSFCCPOptions/reqConnectAutoClose"] == 'true' ? true : false;
+                connectAutoLogin = ccSettings["/reqConnectSFCCPOptions/reqConnectAutoLogin"];
+                connectAutoLogin = parseInt(connectAutoLogin);
+                if (connectAutoLogin > 0) connectAutoLogin = connectAutoLogin * 1000;
                 //end additions for SSO
 
                 connectCW = (isInConsole ? ccSettings["/reqConnectSFCCPOptions/reqConnectCW"] : ccSettings["/reqConnectSFCCPOptions/reqConnectCLCW"]) + "px";
@@ -427,15 +434,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 sforce.interaction.cti.setSoftphoneWidth(connectCW, cbWidthSet);
                 sforce.interaction.cti.setSoftphoneHeight(connectCH, cbHeightSet);
 
-                 //auto-login
-                    connect.getLog().info("ConnectSFCCP:cbInConsole:connectAutoLogin=" + connectAutoLogin);
-                    if(connectAutoLogin >= 1000)
-                    {
-                        setTimeout( function () {
-                            if(connectAutoLogin >= 1000) document.getElementById('loginButton').click();
-                        }, connectAutoLogin )
+                //auto-login
+                connect.getLog().info("ConnectSFCCP:cbInConsole:connectAutoLogin=" + connectAutoLogin);
+                if (connectAutoLogin >= 1000) {
+                    setTimeout(function () {
+                        if (connectAutoLogin >= 1000) document.getElementById('loginButton').click();
+                    }, connectAutoLogin)
 
-                    }
+                }
 
                 loadACSFIntegration();
             };

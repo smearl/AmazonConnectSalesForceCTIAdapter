@@ -1,4 +1,6 @@
-<!--  You must have an AWS account to use the Amazon Connect CTI Adapter.
+<!--
+    Copyright (c) Aria Solutions 2018
+    You must have an AWS account to use the Amazon Connect CTI Adapter.
 Downloading and/or using the Amazon Connect CTI Adapter is subject to the terms of the AWS Customer Agreement,
 AWS Service Terms, and AWS Privacy Notice.
 
@@ -41,7 +43,9 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
     <apex:includeScript value="{!$Resource.amazon_connect_streams}"/>
     <apex:includeScript value="{!$Resource.libphonenumberjs}"/>
 
-    <apex:includeScript value="{!$Resource.acsf_screenpopmanager}" />
+    //Because the Toolkit by-design does not work with Classic
+    //We resused the ScreenpopManager file from the Adapter
+    <apex:includeScript value="{!$Resource.acsf_clsscreenpopmanager}" />
 
     <apex:slds />
 
@@ -253,7 +257,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
                                     //ScreenPopManager start
 
                                     connect.getLog().info("ConnectSFCCP:cbInConsole:onConnecting:InboundPhone:Invoked");
-                                    ctx.ACSFIntegration.ScreenpopManager.onConnecting(contact, connectPhoneFormat);
+                                    ctx.ACSFIntegration.clsScreenpopManager.onConnecting(contact, connectPhoneFormat);
 
                                     //ScreenPopManager end
 

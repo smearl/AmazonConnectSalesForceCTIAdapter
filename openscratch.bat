@@ -1,0 +1,3 @@
+@echo off
+@echo Open scratch org...
+call sfdx force:org:open -u AwsAdapterTest
