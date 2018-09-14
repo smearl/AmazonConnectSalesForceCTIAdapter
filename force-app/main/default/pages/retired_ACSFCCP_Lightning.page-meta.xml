@@ -3,6 +3,5 @@
     <apiVersion>42.0</apiVersion>
     <availableInTouch>false</availableInTouch>
     <confirmationTokenRequired>false</confirmationTokenRequired>
-    <description>Custom code to address customers request</description>
-    <label>ACSFCCP_Lightning_2</label>
+    <label>ACSFCCP_Lightning</label>
 </ApexPage>

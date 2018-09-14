@@ -1,4 +1,11 @@
-<!--  You must have an AWS account to use the Amazon Connect CTI Adapter.
+<!--
+
+ *******
+ 2018-09-14     Chris Autrey          Changed to retired_ because the page is the first version and is no longer needed 
+
+ *******   
+
+  You must have an AWS account to use the Amazon Connect CTI Adapter.
 Downloading and/or using the Amazon Connect CTI Adapter is subject to the terms of the AWS Customer Agreement,
 AWS Service Terms, and AWS Privacy Notice.
 
@@ -40,7 +47,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
     <apex:slds />
 
     <apex:includeScript value="/support/api/40.0/lightning/opencti_min.js"/>
-    <apex:includeScript value="{!$Resource.amazonconnectjs121}"/>
+    <apex:includeScript value="{!$Resource.amazon_connect_streams}"/>
     <apex:includeScript value="{!$Resource.libphonenumberjs}"/>
 
     <apex:includeScript value="{!$Resource.acsf_screenpopmanager}" />
@@ -259,11 +266,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
                         setupLoginHandler(connectURL);
                     }
 
-                    /* Updating isInbound to isconnected for post screen pop */
+
                     connect.contact(function(contact) {
                         try {
                             contact.onConnecting(function() {
-                                if (contact.isConnected()) {
+                                if (contact.isInbound()) {
 
                                     /* This is now moved to ScreenPopManager
                                     connect.getLog().info("ConnectSFCCP:cbInConsole:onConnecting:InboundPhone:Invoked");

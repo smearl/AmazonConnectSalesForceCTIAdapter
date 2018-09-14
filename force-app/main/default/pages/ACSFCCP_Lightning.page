@@ -40,7 +40,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
     <apex:slds />
 
     <apex:includeScript value="/support/api/40.0/lightning/opencti_min.js"/>
-    <apex:includeScript value="{!$Resource.amazon_connect_streams}"/>
+    <apex:includeScript value="{!$Resource.amazonconnectjs121}"/>
     <apex:includeScript value="{!$Resource.libphonenumberjs}"/>
 
     <apex:includeScript value="{!$Resource.acsf_screenpopmanager}" />
@@ -259,11 +259,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
                         setupLoginHandler(connectURL);
                     }
 
-
+                    /* Updating isInbound to isconnected for post screen pop */
                     connect.contact(function(contact) {
                         try {
                             contact.onConnecting(function() {
-                                if (contact.isInbound()) {
+                                if (contact.isConnected()) {
 
                                     /* This is now moved to ScreenPopManager
                                     connect.getLog().info("ConnectSFCCP:cbInConsole:onConnecting:InboundPhone:Invoked");
