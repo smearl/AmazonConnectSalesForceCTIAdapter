@@ -196,9 +196,12 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 </div>
                 <div id="transferBtn" class="hidden" style="position:absolute; top:240px; right:10px;">
                     <button class="slds-button slds-button_icon slds-button_icon-container slds-button_icon-border-filled" title="{!$Label.ACSFCCP_Store_Call_Information}">
+                        
+                        <!-- This svg was causing issues in Chrome because it is accessing resource across different domains
+                            (the visual force domain of the iframe page and the main page). I vote we delete it.
                         <svg class="slds-button__icon" aria-hidden="true">
                             <use xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/standard-sprite/svg/symbols.svg#record')}" />
-                        </svg>
+                        </svg> -->
                         <span class="slds-assistive-text">{!$Label.ACSFCCP_Store_Call_Information}</span>
                     </button>
                 </div>
