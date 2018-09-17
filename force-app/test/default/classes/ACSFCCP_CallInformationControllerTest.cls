@@ -30,4 +30,14 @@ private class ACSFCCP_CallInformationControllerTest {
       }
     }
   }
+
+  static void testStoreCallInformation() {
+    if (ACSFCCP_CallInformationController.isPlatformCacheAvailable()) {
+      String info = '{"contactId" : "123123-1231-1123123", "data" : "123"}';
+      String result = ACSFCCP_CallInformationController.storeCallInformation(info);
+      System.assertEquals('12312312311123123', result);
+
+    }
+    //System.assert(false, 'Platform cache not available');
+  }
 }
