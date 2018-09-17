@@ -45,7 +45,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
 
     //Because the Toolkit by-design does not work with Classic
     //We resused the ScreenpopManager file from the Adapter
-    <apex:includeScript value="{!$Resource.acsf_clsscreenpopmanager}" />
+    <apex:includeScript value="{!$Resource.acsf_screenpopmanager}" />
 
     <apex:slds />
 
