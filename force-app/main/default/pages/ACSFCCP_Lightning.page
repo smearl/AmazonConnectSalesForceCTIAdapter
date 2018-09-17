@@ -41,7 +41,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
 
     <apex:slds />
 
-    <apex:remoteObjects>
+    <apex:remoteObjects >
         <apex:remoteObjectModel name="ServicePresenceStatus" fields="Id, DeveloperName, MasterLabel" />
         <apex:remoteObjectModel name="Call_Attributes_Configuration__mdt" fields="Id" jsShorthand="Call_Attributes_Configuration">
             <apex:remoteObjectField name="Attribute_Name__c" jsShorthand="Attribute_Name" />

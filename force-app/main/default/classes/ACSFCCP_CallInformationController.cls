@@ -14,7 +14,7 @@ limitations under the License.
 */
 
 global with sharing class ACSFCCP_CallInformationController {
-  public static final String CACHE_PARTITION_PREFIX = 'ACSFCCPCallInfo';
+  public static final String CACHE_PARTITION_PREFIX = 'ACSFCCP';
   public static final String CACHE_TEST_KEY = 'TESTKEY';
   public static final String CACHE_TEST_VALUE = 'TEST-VALUE';
 
