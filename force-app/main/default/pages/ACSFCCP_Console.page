@@ -96,7 +96,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <apex:includeScript value="/support/api/40.0/interaction.js" />
     <!-- <apex:includeScript value="//cticm.chrysalis.net/scripts/interaction.js"/> -->
     <apex:includeScript value="/support/console/40.0/integration.js" />
-    <apex:includeScript value="{!$Resource.amazonconnectjs121}" />
+    <apex:includeScript value="{!$Resource.amazonconnectstreams}" />
     <apex:includeScript value="{!$Resource.libphonenumberjs}" />
     <apex:includeScript value="{!$Resource.acsf_callattributesdisplay}" />
     <apex:includeScript value="{!$Resource.acsf_omnipresencesync}" />
