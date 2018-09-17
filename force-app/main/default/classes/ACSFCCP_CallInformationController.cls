@@ -14,7 +14,7 @@ limitations under the License.
 */
 
 global with sharing class ACSFCCP_CallInformationController {
-  public static final String CACHE_PARTITION_PREFIX = 'ACTCallInfo';
+  public static final String CACHE_PARTITION_PREFIX = 'ACSFCCPCallInfo';
   public static final String CACHE_TEST_KEY = 'TESTKEY';
   public static final String CACHE_TEST_VALUE = 'TEST-VALUE';
 
@@ -33,10 +33,11 @@ global with sharing class ACSFCCP_CallInformationController {
   }
 
   @RemoteAction
-  global static void storeCallInformation(string properties) {
+  global static String storeCallInformation(string properties) {
     Map<String, String> callInformation = (Map<String, String>) JSON.deserialize(properties, Map<String, String>.class);
     String cid = callInformation.get('contactId').replace('-', '');
     Cache.Org.put(CACHE_PARTITION_PREFIX + cid, properties, 7200);
+    return cid;
   }
 
   @RemoteAction
