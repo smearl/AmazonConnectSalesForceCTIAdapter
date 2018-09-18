@@ -37,11 +37,11 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
 
-<apex:page id="ACSFCCP_Classic" showHeader="false">
+<apex:page id="ACSFCCP_Classic_2" showHeader="false">
     <apex:includeScript value="/support/api/40.0/interaction.js"/>
     <apex:includeScript value="/support/console/40.0/integration.js"/>
     <apex:includeScript value="{!$Resource.amazonconnectstreams}"/>
-    <apex:includeScript value="{!$Resource.libphonenumberjs}"/>
+    <apex:includeScript value="{!$Resource.libphonenumberjs_2}"/>
 
     <apex:includeScript value="{!$Resource.acsf_screenpopmanager}" />
 

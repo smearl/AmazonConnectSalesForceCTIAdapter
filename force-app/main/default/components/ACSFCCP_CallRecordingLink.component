@@ -1,0 +1,71 @@
+<!--
+Copyright 2018 VoiceFoundry, LLC
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+Copyright 2018 Aria Solutions Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+ -->
+
+<apex:component id="ACT_CallRecordingLink">
+  <apex:attribute name="contactId" description="Amazon Connect Contact Id for the recording" type="String" required="true"
+  />
+
+  <apex:SLDS />
+  <apex:outputPanel rendered="{!NOT(ISBLANK(contactId)) && NOT(ISBLANK($Setup.Amazon_Connect__c.url__c))}">
+    <!--<a id="callRecordDownload">Download Call Recording</a>-->
+  <div id='recordingWrapper'>
+    <audio controls="controls" id="callRecordDownload" preload="auto">
+      <source id="audioSource" onerror="audioError()" type="audio/mpeg" src="UNKNOWN">Your browser does not support this
+      call recording widget.</source>
+    </audio>
+  </div>
+  </apex:outputPanel>
+
+  <script>
+    var recordLink = document.getElementById('callRecordDownload');
+    var recordWidget = document.getElementById('audioSource');
+    var callId = "{!contactId}";
+    var i = callId.indexOf("::");
+    if (i >= 0)
+      callId = callId.slice(0, i);
+
+    recordLink.href = "{!JSENCODE($Setup.Amazon_Connect__c.url__c)}/connect/get-recording?format=mp3&callLegId=" + callId; 
+    recordWidget.src = "{!JSENCODE($Setup.Amazon_Connect__c.url__c)}/connect/get-recording?format=mp3&callLegId=" + callId;
+
+    function audioError(){
+      try{
+      var recordWidgetWrapper = document.getElementById("recordingWrapper");
+      var recordingIssue = document.createElement('p');
+      var issueText = document.createTextNode('You are not able to access the recording. Please make sure you are logged in and the recording exists.');
+      recordingIssue.append(issueText);
+      recordWidgetWrapper.append(recordingIssue);
+      //document.getElementById('callRecordDownload').remove();
+      document.getElementById('callRecordDownload').setAttribute('style', 'display:none;');
+      }catch(e){
+        console.error('An issue occurred with the recording error display');
+      }
+    }
+  </script>
+</apex:component>

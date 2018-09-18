@@ -39,6 +39,11 @@
         <field>Case.AC_Contact_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>User.Amazon_Connect_Username__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Toolkit for Amazon Connect - Agent</label>
     <objectPermissions>
@@ -63,11 +68,11 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>ACSFCCP_Console</apexPage>
+        <apexPage>ACSFCCP_Console_2</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>ACSFCCP_Lightning</apexPage>
+        <apexPage>ACSFCCP_Lightning_2</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

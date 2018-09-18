@@ -66,7 +66,7 @@ WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEM
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
-<apex:page id="ACSFCCP_Console" showHeader="false" controller="ACSFCCP_NamespaceController" extensions="ACSFCCP_CallInformationController">
+<apex:page id="ACSFCCP_Console_2" showHeader="false" controller="ACSFCCP_NamespaceController" extensions="ACSFCCP_CallInformationController">
     <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
 
     <apex:slds />
@@ -97,7 +97,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <!-- <apex:includeScript value="//cticm.chrysalis.net/scripts/interaction.js"/> -->
     <apex:includeScript value="/support/console/40.0/integration.js" />
     <apex:includeScript value="{!$Resource.amazonconnectstreams}" />
-    <apex:includeScript value="{!$Resource.libphonenumberjs}" />
+    <apex:includeScript value="{!$Resource.libphonenumberjs_2}" />
     <apex:includeScript value="{!$Resource.acsf_callattributesdisplay}" />
     <apex:includeScript value="{!$Resource.acsf_omnipresencesync}" />
     <apex:includeScript value="{!$Resource.acsf_postcalltask}" />

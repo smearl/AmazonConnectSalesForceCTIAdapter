@@ -3,6 +3,6 @@
     <apiVersion>41.0</apiVersion>
     <availableInTouch>false</availableInTouch>
     <confirmationTokenRequired>false</confirmationTokenRequired>
-    <description>Amazon Connect Softphone page, which is an extension to the Amazon Connect Open CTI Adapter.</description>
-    <label>ACSFCCP_Console</label>
+    <description>Amazon Connect Softphone page for Lightning Console, which is an extension to the Amazon Connect Open CTI Adapter.</description>
+    <label>ACSFCCP_Lightning_2</label>
 </ApexPage>

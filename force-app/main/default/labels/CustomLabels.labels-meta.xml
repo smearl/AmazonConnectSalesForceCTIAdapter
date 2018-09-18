@@ -15,6 +15,48 @@
         <value>Value</value>
     </labels>
     <labels>
+        <fullName>ACSFCCP_Call_Date_Header</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Call Date Header</shortDescription>
+        <value>Call Date</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_Call_Duration_Header</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Call Duration Header</shortDescription>
+        <value>Phone Call Duration</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_Call_Identifier_Header</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Call Identifier Header</shortDescription>
+        <value>Call Identifier</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_Call_Type_Header</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Call Type Header</shortDescription>
+        <value>Call Type</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_Minutes_in_Call_View</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Minutes in Call View</shortDescription>
+        <value>min</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_Phone_Number_Header</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Phone Number Header</shortDescription>
+        <value>Phone Number</value>
+    </labels>
+    <labels>
         <fullName>ACSFCCP_PostCallTaskTabName</fullName>
         <language>en_US</language>
         <protected>false</protected>
@@ -22,10 +64,24 @@
         <value>Call Wrap-up</value>
     </labels>
     <labels>
+        <fullName>ACSFCCP_Seconds_in_Call_View</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Seconds in Call View</shortDescription>
+        <value>sec</value>
+    </labels>
+    <labels>
         <fullName>ACSFCCP_Store_Call_Information</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>alt text that is shown when hover over button</shortDescription>
         <value>Click to store current tabs for call transfer.</value>
+    </labels>
+    <labels>
+        <fullName>ACSFCCP_Task_successfully_saved</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Task successfully saved</shortDescription>
+        <value>Task saved successfully!</value>
     </labels>
 </CustomLabels>
