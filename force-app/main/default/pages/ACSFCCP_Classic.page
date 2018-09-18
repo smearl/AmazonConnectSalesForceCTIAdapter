@@ -43,8 +43,6 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
     <apex:includeScript value="{!$Resource.amazonconnectstreams}"/>
     <apex:includeScript value="{!$Resource.libphonenumberjs}"/>
 
-    //Because the Toolkit by-design does not work with Classic
-    //We resused the ScreenpopManager file from the Adapter
     <apex:includeScript value="{!$Resource.acsf_screenpopmanager}" />
 
     <apex:slds />
@@ -257,7 +255,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
                                     //ScreenPopManager start
 
                                     connect.getLog().info("ConnectSFCCP:cbInConsole:onConnecting:InboundPhone:Invoked");
-                                    ctx.ACSFIntegration.clsScreenpopManager.onConnecting(contact, connectPhoneFormat);
+                                    ctx.ACSFIntegration.ScreenpopManager.onConnecting(contact, connectPhoneFormat);
 
                                     //ScreenPopManager end
 
