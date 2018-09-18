@@ -4,6 +4,8 @@
 .vscode
 IlluminatedCloud
 mdapioutput
+mdapipkg
+mdapipkg2
 force-app/main/default/layouts/Event-Event Layout.layout-meta.xml
 force-app/main/default/layouts/Task-Task Layout.layout-meta.xml
 force-app/main/default/profiles/Admin.profile-meta.xml

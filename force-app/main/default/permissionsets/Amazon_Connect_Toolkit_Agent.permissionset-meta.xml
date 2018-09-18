@@ -8,10 +8,6 @@
         <apexClass>ACSFCCP_CallLogging_ViewExt</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>ACSFCCP_UpdateReportAgentField</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
     <description>Permissions to all components that an agent would need to use the toolkit.</description>
     <fieldPermissions>
         <editable>false</editable>

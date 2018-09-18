@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <description>Permissions required to access the toolkit reports.</description>
-    <fieldPermissions>
+    <!--     <fieldPermissions>
         <editable>false</editable>
         <field>ACSFCCP_HistoricalReportData__c.AC_Record_Id__c</field>
         <readable>true</readable>
@@ -396,6 +396,7 @@
         <field>ACSFCCP_HistoricalReportData__c.Service_level_90_seconds__c</field>
         <readable>true</readable>
     </fieldPermissions>
+ -->
     <fieldPermissions>
         <editable>true</editable>
         <field>User.Amazon_Connect_Username__c</field>
@@ -403,7 +404,7 @@
     </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Toolkit for Amazon Connect - Manager</label>
-    <objectPermissions>
+    <!-- <objectPermissions>
         <allowCreate>false</allowCreate>
         <allowDelete>false</allowDelete>
         <allowEdit>false</allowEdit>
@@ -411,7 +412,7 @@
         <modifyAllRecords>false</modifyAllRecords>
         <object>ACSFCCP_HistoricalReportData__c</object>
         <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
+    </objectPermissions> -->
     <tabSettings>
         <tab>standard-report</tab>
         <visibility>Visible</visibility>

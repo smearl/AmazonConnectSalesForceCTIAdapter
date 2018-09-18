@@ -41,7 +41,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
 
     <apex:slds />
 
-    <apex:remoteObjects>
+    <apex:remoteObjects >
         <apex:remoteObjectModel name="ServicePresenceStatus" fields="Id, DeveloperName, MasterLabel" />
         <apex:remoteObjectModel name="Call_Attributes_Configuration__mdt" fields="Id" jsShorthand="Call_Attributes_Configuration">
             <apex:remoteObjectField name="Attribute_Name__c" jsShorthand="Attribute_Name" />
@@ -59,7 +59,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
 
     <apex:includeScript value="/support/api/41.0/lightning/opencti_min.js" />
 
-    <apex:includeScript value="{!$Resource.amazonconnectjs121}" />
+    <apex:includeScript value="{!$Resource.amazonconnectstreams}" />
     <apex:includeScript value="{!$Resource.libphonenumberjs}" />
     <apex:includeScript value="{!$Resource.acsf_callattributesdisplay}" />
     <apex:includeScript value="{!$Resource.acsf_callinformation}" />

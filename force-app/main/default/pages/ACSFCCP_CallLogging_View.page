@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
  -->
 
-<apex:page id="ACSFCCP_CallLogging_View" showHeader="false" sideBar="false" standardController="Account" extensions="ACSFCCP_CallLogging_ViewExt">
+ <apex:page id="ACSFCCP_CallLogging_View" showHeader="false" sideBar="false" standardController="Account" extensions="ACSFCCP_CallLogging_ViewExt">
   <apex:slds />
 
   <table width="100%" class="slds-table slds-table_bordered slds-table_cell-buffer">

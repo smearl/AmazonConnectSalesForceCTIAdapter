@@ -5,9 +5,4 @@
     <confirmationTokenRequired>false</confirmationTokenRequired>
     <description>Amazon Connect Softphone page for Lightning Console, which is an extension to the Amazon Connect Open CTI Adapter.</description>
     <label>ACSFCCP_Lightning</label>
-    <packageVersions>
-        <majorNumber>1</majorNumber>
-        <minorNumber>13</minorNumber>
-        <namespace>amazonconnect</namespace>
-    </packageVersions>
 </ApexPage>

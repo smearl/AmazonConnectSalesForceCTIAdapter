@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
  -->
 
-<apex:page id="ACSFCCP_PostCallUpdateTask" standardcontroller="Task" extensions="ACSFCCP_PostCallUpdateTaskController">
+ <apex:page id="ACSFCCP_PostCallUpdateTask" standardcontroller="Task" extensions="ACSFCCP_PostCallUpdateTaskController">
   <apex:includeScript value="/support/console/41.0/integration.js"/>
   <apex:slds />
 
@@ -55,7 +55,7 @@ limitations under the License.
             <apex:selectOptions value="{!dispositionCodes}"/>
           </apex:selectList>
         </apex:pageBlockSection>
-        <apex:pageBlockButtons>
+        <apex:pageBlockButtons >
           <apex:commandButton styleClass="slds-button slds-button_brand" action="{!quicksave}" value="Save" onComplete="closeTaskTab();" />
           <span id="onSaveCompleted" class="hidden">{!$Label.ACSFCCP_Task_successfully_saved}</span>
         </apex:pageBlockButtons>
