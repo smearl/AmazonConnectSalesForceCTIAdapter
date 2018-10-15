@@ -41,7 +41,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
 
     <apex:slds />
 
-    <apex:remoteObjects >
+    <apex:remoteObjects>
         <apex:remoteObjectModel name="ServicePresenceStatus" fields="Id, DeveloperName, MasterLabel" />
         <apex:remoteObjectModel name="Call_Attributes_Configuration__mdt" fields="Id" jsShorthand="Call_Attributes_Configuration">
             <apex:remoteObjectField name="Attribute_Name__c" jsShorthand="Attribute_Name" />
@@ -311,8 +311,8 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
                     connectAutoClose = ccSettings["/reqConnectSFCCPOptions/reqConnectAutoClose"] == 'true' ? true : false;
                     connectAutoLogin = ccSettings["/reqConnectSFCCPOptions/reqConnectAutoLogin"];
                     connectAutoLogin = parseInt(connectAutoLogin);
-                    if(connectAutoLogin > 0) connectAutoLogin = connectAutoLogin * 1000;
-                   //end additions for SSO
+                    if (connectAutoLogin > 0) connectAutoLogin = connectAutoLogin * 1000;
+                    //end additions for SSO
 
                     connectCW = ccSettings["/reqConnectSFCCPOptions/reqConnectLW"] + "px";
                     connectCH = ccSettings["/reqConnectSFCCPOptions/reqConnectLH"] + "px";
@@ -362,6 +362,17 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
                             connect.getLog().error("ConnectSFCCP:onConnecting:Error:").withException(e);
                         }
 
+                        //MD-added contact.onIncoming()
+                        try {
+                            contact.onIncoming(function () {
+                                console.log("ConnectSFCCP:contact.onIncoming");
+                                ctx.ACSFIntegration.ScreenpopManager.onConnecting(contact, connectPhoneFormat);
+                                ctx.ACSFIntegration.CallAttributesDisplay.onConnecting(contact);
+                            });
+                        } catch (e) {
+                            connect.getLog().error("ConnectSFCCP:onIncoming:Error:").withException(e);
+                        }
+
                         try {
                             contact.onAccepted(function () {
                                 ctx.ACSFIntegration.CallInformation.onAccepted(contact);
@@ -401,11 +412,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
 
                     //auto-login
                     connect.getLog().info("ConnectSFCCP:cbInConsole:connectAutoLogin=" + connectAutoLogin);
-                    if(connectAutoLogin >= 1000)
-                    {
-                        setTimeout( function () {
-                            if(connectAutoLogin >= 1000) document.getElementById('loginButton').click();
-                        }, connectAutoLogin )
+                    if (connectAutoLogin >= 1000) {
+                        setTimeout(function () {
+                            if (connectAutoLogin >= 1000) document.getElementById('loginButton').click();
+                        }, connectAutoLogin)
 
                     }
 

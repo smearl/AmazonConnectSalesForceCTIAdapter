@@ -71,7 +71,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <apex:slds />
 
-    <apex:remoteObjects >
+    <apex:remoteObjects>
         <apex:remoteObjectModel name="ServicePresenceStatus" fields="Id, DeveloperName, MasterLabel" />
 
         <apex:remoteObjectModel name="Call_Attributes_Configuration__mdt" fields="Id" jsShorthand="Call_Attributes_Configuration">
@@ -88,7 +88,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <apex:remoteObjectField name="Case__c" jsShorthand="Case" />
         </apex:remoteObjectModel>
     </apex:remoteObjects>
-<!--
+    <!--
     <apex:remoteObjectField name="Case__c" jsShorthand="Case" />
     </apex:remoteObjectModel>
     </apex:remoteObjects>
@@ -196,7 +196,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 </div>
                 <div id="transferBtn" class="hidden" style="position:absolute; top:240px; right:10px;">
                     <button class="slds-button slds-button_icon slds-button_icon-container slds-button_icon-border-filled" title="{!$Label.ACSFCCP_Store_Call_Information}">
-                       <!-- <svg class="slds-button__icon" aria-hidden="true">
+                        <!-- <svg class="slds-button__icon" aria-hidden="true">
                             <use xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/standard-sprite/svg/symbols.svg#record')}" />
                         </svg>-->
                         <span class="slds-assistive-text">{!$Label.ACSFCCP_Store_Call_Information}</span>
@@ -366,6 +366,18 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     } catch (e) {
                         connect.getLog().error("ConnectSFCCP:onConnecting:Error:").withException(e);
                     }
+
+                    //MD-added contact.onIncoming()
+                    try {
+                        contact.onIncoming(function () {
+                            console.log("ConnectSFCCP:contact.onIncoming");
+                            ctx.ACSFIntegration.ScreenpopManager.onConnecting(contact, connectPhoneFormat);
+                            ctx.ACSFIntegration.CallAttributesDisplay.onConnecting(contact);
+                        });
+                    } catch (e) {
+                        connect.getLog().error("ConnectSFCCP:onIncoming:Error:").withException(e);
+                    }
+
 
                     try {
                         contact.onAccepted(function () {
