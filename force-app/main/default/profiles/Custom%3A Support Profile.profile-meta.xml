@@ -32,6 +32,10 @@
         <apexClass>ACSFCCP_PostCallUpdateTaskCtrlTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
+    <classAccesses>
+        <apexClass>ACSFCCP_UpdateReportAgentField</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
     <custom>true</custom>
     <fieldPermissions>
         <editable>false</editable>
@@ -41,6 +45,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>ACSFCCP_HistoricalReportData__c.After_contact_work_time__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Agent__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -206,6 +215,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_20_seconds__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
