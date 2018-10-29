@@ -1,16 +1,11 @@
 # SFDX  App
-Master branch is unchanged from origin
-
-develop branch contains renames
-
 
 ## Dev, Build and Test
+AWS has a dev edition org located at https://whitewalker-dev-ed.my.salesforce.com
 
 ## Resources
 
-
 ## Description of Files and Directories
-
 
 ## Issues
 
