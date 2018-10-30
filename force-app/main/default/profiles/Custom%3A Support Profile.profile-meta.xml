@@ -36,6 +36,10 @@
         <apexClass>ACSFCCP_UpdateReportAgentField</apexClass>
         <enabled>false</enabled>
     </classAccesses>
+    <classAccesses>
+        <apexClass>ACSFCCP_UpdateReportAgentFieldTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
     <custom>true</custom>
     <fieldPermissions>
         <editable>false</editable>
@@ -129,6 +133,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_Consulted__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>ACSFCCP_HistoricalReportData__c.Contacts_abandoned__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -199,6 +208,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_In_240_seconds__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_120_seconds__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -215,6 +229,51 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_20_seconds__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_25_seconds__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_300_seconds__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_30_seconds__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_45_seconds__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_600_seconds__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_60_seconds__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_90_seconds__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_handled__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_handled_incoming__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
