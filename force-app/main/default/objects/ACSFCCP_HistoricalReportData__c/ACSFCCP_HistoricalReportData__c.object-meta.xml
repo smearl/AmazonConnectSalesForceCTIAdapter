@@ -55,7 +55,7 @@
     <enableStreamingApi>true</enableStreamingApi>
     <label>Amazon Connect Historical Report Data</label>
     <nameField>
-        <label>Amazon Connect Historical Report Data Name</label>
+        <label>Amazon Connect Report Data Reference</label>
         <type>Text</type>
     </nameField>
     <pluralLabel>Amazon Connect Historical Report Data</pluralLabel>
