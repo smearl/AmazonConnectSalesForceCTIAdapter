@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ReportFolder xmlns="http://soap.sforce.com/2006/04/metadata">
+<DashboardFolder xmlns="http://soap.sforce.com/2006/04/metadata">
     <folderShares>
         <accessLevel>Manage</accessLevel>
         <sharedTo>test-c8n8qqt6jjop@example.com</sharedTo>
         <sharedToType>User</sharedToType>
     </folderShares>
-    <name>Amazon Connect Reports</name>
-</ReportFolder>
+    <name>Amazon Connect Dashboards</name>
+</DashboardFolder>
