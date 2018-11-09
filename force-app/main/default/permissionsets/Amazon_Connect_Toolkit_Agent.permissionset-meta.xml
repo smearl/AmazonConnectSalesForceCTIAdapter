@@ -8,7 +8,21 @@
         <apexClass>ACSFCCP_CallLogging_ViewExt</apexClass>
         <enabled>true</enabled>
     </classAccesses>
+    <classAccesses>
+        <apexClass>ACSFCCP_UpdateReportAgentField</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <description>Permissions to all components that an agent would need to use the toolkit.</description>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Agent__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Type__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Call_Campaign__c.Account__c</field>
@@ -38,11 +52,6 @@
         <editable>false</editable>
         <field>Case.AC_Contact_Id__c</field>
         <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>User.Amazon_Connect_Username__c</field>
-        <readable>false</readable>
     </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Toolkit for Amazon Connect - Agent</label>
