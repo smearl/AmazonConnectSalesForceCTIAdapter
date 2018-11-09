@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Agent__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.AC_Object_Name__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Service_level_60_seconds__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>ACSFCCP_HistoricalReportData__c.Service_level_60_seconds__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>ACSFCCP_HistoricalReportData__c.Type__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Agent</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>ACSFCCP_HistoricalReportData__c.Created_Date__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Agent Service Level 60 Today</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$ACSFCCP_HistoricalReportData__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_TODAY</interval>
+    </timeFrameFilter>
+</Report>
