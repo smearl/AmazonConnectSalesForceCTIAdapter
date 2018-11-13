@@ -103,7 +103,7 @@ limitations under the License.
       "&Status=" + "Completed" +
       "&ActivityDate=" + callContext.callStartdate +
       "&Subject=" + callContext.callType + " - "+ callContext.callQueue + " - "+ callContext.callPhoneNumber +
-      "&TaskSubtype=" + "Task" +
+      "&TaskSubtype=" + "Call" +
       "&Phone=" + callContext.callPhoneNumber;
 
     var taskObj = {
