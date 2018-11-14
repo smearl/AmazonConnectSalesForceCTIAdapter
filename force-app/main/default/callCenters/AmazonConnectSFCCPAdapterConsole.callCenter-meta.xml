@@ -120,6 +120,11 @@
             <name>reqConnectPhoneFormat</name>
             <value>{&quot;OPF&quot;:&quot;0&quot;,&quot;NPF&quot;:&quot;1&quot;,&quot;Country&quot;:&quot;US&quot;,&quot;NF&quot;:&quot;International_plaintext&quot;,&quot;TNF&quot;:&quot;(555) 123-4567&quot;}</value>
         </items>
+        <items>
+            <label>Use Wrap-up Form</label>
+            <name>reqUseWrapupForm</name>
+            <value>false</value>
+        </items>
         <label>Amazon Connect Information</label>
         <name>reqConnectSFCCPOptions</name>
     </sections>
