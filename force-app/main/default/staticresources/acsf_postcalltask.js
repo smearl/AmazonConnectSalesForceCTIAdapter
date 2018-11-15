@@ -13,14 +13,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-(function(ctx) {
+(function (ctx) {
   if (ctx.ACSFIntegration === undefined) {
     ctx.ACSFIntegration = {};
   }
 
   if (sforce.console && !sforce.console.isInConsole()) {
     ctx.ACSFIntegration.PostCallTask = {
-      onAgentHandler : function() {
+      onAgentHandler: function () {
         connect.getLog().info("ACSFIntegration:PostCallTask:onAgentHandler not in console");
       }
     };
@@ -32,17 +32,17 @@ limitations under the License.
   var _namespacePrefix;
 
   ctx.ACSFIntegration.PostCallTask = {
-    onAgentHandler : function(namespacePrefix, tabLabel) {
+    onAgentHandler: function (namespacePrefix, tabLabel, ccSettings) {
       connect.getLog().info("ACSFIntegration:PostCallTask:onAgentHandler invoked");
       _tabLabel = tabLabel;
       _namespacePrefix = namespacePrefix;
 
-      connect.contact(function(contact) {
+      connect.contact(function (contact) {
         var conns = contact.getConnections();
         var custConn = conns.find(
           c => c.getType() === connect.ConnectionType.INBOUND ||
-          c.getType() === connect.ConnectionType.OUTBOUND
-         );
+            c.getType() === connect.ConnectionType.OUTBOUND
+        );
         if (!custConn)
           return;
 
@@ -52,27 +52,31 @@ limitations under the License.
         var containsAtSymbol = phoneNumber.indexOf('@') > -1;
         setCallContextProperty('callPhoneNumber', phoneNumber.substring(0, containsAtSymbol ? phoneNumber.indexOf('@') : phoneNumber.length).replace('sip:', ''));
 
-        contact.onAccepted(function(contactOnAccepted) {
+        contact.onAccepted(function (contactOnAccepted) {
           connect.getLog().info("ACSFIntegration:PostCallTask:onAgentHandler:ContactOnAcceptedHandler invoked");
           startActiveCall();
         });
 
-        contact.onConnected(function(contactOnConnected) {
+        contact.onConnected(function (contactOnConnected) {
           connect.getLog().info("ACSFIntegration:PostCallTask:onAgentHandler:ContactOnConnectedHandler invoked");
           if (!contactOnConnected.isInbound()) {
             startActiveCall();
           }
         });
 
-        contact.onEnded(function(contactOnEnded) {
+        contact.onEnded(function (contactOnEnded) {
           connect.getLog().info("ACSFIntegration:PostCallTask:onAgentHandler:ContactOnEndedHandler invoked");
           setCallContextProperty("callEndTime", new Date().getTime());
           setCallContextProperty("callQueue", contact.getQueue().name);
 
           var callContext = getCurrentCallContext();
-
           clearCallContext();
-          if (callContext.callActive) {
+
+          //added in 2.5 to make disposition (wrap-up) form
+          var connectUseWrapupForm = false;
+          connectUseWrapupForm = ccSettings["/reqConnectSFCCPOptions/reqUseWrapupForm"] == 'true' ? true : false;
+
+          if (callContext.callActive && connectUseWrapupForm) {
             createTask(contactOnEnded, callContext);
           }
         });
@@ -95,14 +99,14 @@ limitations under the License.
     connect.getLog().info("ACSFIntegration:PostCallTask:createTask invoked");
     var callDuration = Math.floor((callContext.callEndTime - callContext.callStartTime) / 1000);
 
-    var taskStr = "CallDurationInSeconds=" + callDuration  +
+    var taskStr = "CallDurationInSeconds=" + callDuration +
       "&CallObject=" + callContact.getContactId() +
       "&CallType=" + callContext.callType +
       "&Type=" + "Call" +
       "&IsClosed=" + true +
       "&Status=" + "Completed" +
       "&ActivityDate=" + callContext.callStartdate +
-      "&Subject=" + callContext.callType + " - "+ callContext.callQueue + " - "+ callContext.callPhoneNumber +
+      "&Subject=" + callContext.callType + " - " + callContext.callQueue + " - " + callContext.callPhoneNumber +
       "&TaskSubtype=" + "Call" +
       "&Phone=" + callContext.callPhoneNumber;
 
@@ -128,17 +132,17 @@ limitations under the License.
         return;
       }
 
-      var taskId  = response.result || response.returnValue.recordId;
+      var taskId = response.result || response.returnValue.recordId;
 
       connect.getLog().info("ACSFIntegration:PostCallTask:createTask task saved. Id=" + taskId);
       var taskURL = "/apex/" + _namespacePrefix + "ACSFCCP_PostCallUpdateTask?id=" + taskId;
 
       if (sforce.console) {
         // Classic Console
-        sforce.console.getFocusedPrimaryTabId(function(result){
+        sforce.console.getFocusedPrimaryTabId(function (result) {
           var primaryTabId = result.id;
-          if (primaryTabId !== "null"){
-            sforce.console.openSubtab(primaryTabId , taskURL, true, _tabLabel, null, openWorkingTab);
+          if (primaryTabId !== "null") {
+            sforce.console.openSubtab(primaryTabId, taskURL, true, _tabLabel, null, openWorkingTab);
           }
           else {
             sforce.console.openPrimaryTab(null, taskURL, true, _tabLabel, openWorkingTab);
@@ -168,7 +172,7 @@ limitations under the License.
       sforce.console && sforce.console.addEventListener(
         sforce.console.ConsoleEvent.CLOSE_TAB,
         onTabClose,
-        { tabId : result.id }
+        { tabId: result.id }
       );
     }
     else {
@@ -177,16 +181,16 @@ limitations under the License.
   }
 
   function onTabClose(result) {
-    connect.agent(function(agent) {
+    connect.agent(function (agent) {
       connect.getLog().info("ACSFIntegration:PostCallTask:onTabClose invoked");
-      var availableState = agent.getAgentStates().filter(function(state) {
+      var availableState = agent.getAgentStates().filter(function (state) {
         return state.name === "Available";
       })[0];
       agent.setState(availableState, {
-        success : function() {
+        success: function () {
           connect.getLog().info("ACSFIntegration:PostCallTask:onTabClose agent state set to Available");
         },
-        failure : function() {
+        failure: function () {
           connect.getLog().error("ACSFIntegration:PostCallTask:onTabClose unable to set agent state to Available");
         }
       });
@@ -195,7 +199,7 @@ limitations under the License.
     sforce.console && sforce.console.removeEventListener(
       sforce.console.ConsoleEvent.CLOSE_TAB,
       onTabClose,
-      { tabId : result.id }
+      { tabId: result.id }
     );
   }
 

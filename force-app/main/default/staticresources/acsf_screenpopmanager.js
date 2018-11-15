@@ -110,7 +110,7 @@
 
     //entrypoint
     ctx.ACSFIntegration.ScreenpopManager = {
-        onConnecting: function(contact, connectPhoneFormat, ccpPopup) {
+        onConnecting: function(contact, connectPhoneFormat) {
             connect.getLog().info("ACSFIntegration:ScreenpopManager:onConnecting");
             setSoftphoneVisible();
 
