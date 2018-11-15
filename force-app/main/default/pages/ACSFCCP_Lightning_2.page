@@ -200,7 +200,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
             var loadACSFIntegration = function () {
                 ctx.ACSFIntegration.CallAttributesDisplay.onAgentHandler();
                 ctx.ACSFIntegration.CallInformation.onAgentHandler("{!namespaceClassPrefix}");
-                ctx.ACSFIntegration.PostCallTask.onAgentHandler("{!namespacePagePrefix}", "{!$Label.ACSFCCP_PostCallTaskTabName}");
+                ctx.ACSFIntegration.PostCallTask.onAgentHandler("{!namespacePagePrefix}", "{!$Label.ACSFCCP_PostCallTaskTabName}", ccSettings);
             }
 
             var showLoginScreen = function () {
