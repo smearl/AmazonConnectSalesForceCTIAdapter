@@ -88,12 +88,12 @@
         <items>
             <label>Classic Phone Width</label>
             <name>reqConnectCLCW</name>
-            <value>195</value>
+            <value>200</value>
         </items>
         <items>
             <label>Classic Phone Height</label>
             <name>reqConnectCLCH</name>
-            <value>460</value>
+            <value>400</value>
         </items>
         <items>
             <label>Lightning Container Width</label>
