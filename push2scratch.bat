@@ -4,6 +4,6 @@
 : scratch orgs only last a week and used creating custom objects
 : and othe SF-stuff that can't be created in code
 : push to salesforce
-call sfdx force:source:push -u WW-Reporting
+call sfdx force:source:push -u wwreports
 : pull from salesforce
-call sfdx force:source:pull -u WW-Reporting
+call sfdx force:source:pull -u wwreports
