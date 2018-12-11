@@ -93,6 +93,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Agent_interaction_time_hms__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>ACSFCCP_HistoricalReportData__c.Agent_on_contact_time__c</field>
         <readable>false</readable>
     </fieldPermissions>
