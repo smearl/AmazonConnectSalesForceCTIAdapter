@@ -8,6 +8,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.After_contact_work_time_hms__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>ACSFCCP_HistoricalReportData__c.Agent_First_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -373,7 +378,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Phone_Number__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Queue__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>ACSFCCP_HistoricalReportData__c.Report_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Routing_Profile__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
