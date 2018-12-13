@@ -10,7 +10,10 @@
         <field>ACSFCCP_HistoricalReportData__c.Agent_Name__c</field>
     </columns>
     <columns>
-        <field>ACSFCCP_HistoricalReportData__c.Queue__c</field>
+        <field>ACSFCCP_HistoricalReportData__c.StartInterval__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.EndInterval__c</field>
     </columns>
     <columns>
         <field>ACSFCCP_HistoricalReportData__c.Routing_Profile__c</field>
