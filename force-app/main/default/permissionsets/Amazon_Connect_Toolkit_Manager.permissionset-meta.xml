@@ -43,7 +43,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Agent_idle_time_hms__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>ACSFCCP_HistoricalReportData__c.Agent_interaction_and_hold_time__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Agent_interaction_and_hold_time_hms__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -63,7 +73,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Agent_on_contact_time_hms__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>ACSFCCP_HistoricalReportData__c.Average_after_contact_work_time__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Average_after_contact_work_time_hms__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -73,12 +93,27 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Average_agent_interaction_time_hms__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>ACSFCCP_HistoricalReportData__c.Average_customer_hold_time__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Average_customer_hold_time_hms__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>ACSFCCP_HistoricalReportData__c.Average_handle_time__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Average_handle_time_hms__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -98,7 +133,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Average_queue_abandon_time_hms__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>ACSFCCP_HistoricalReportData__c.Average_queue_answer_time__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Average_queue_answer_time_hms__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -108,12 +153,37 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Avg_agent_intn_and_cust_hld_time_hms__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Avg_outbound_after_contact_work_time_hms__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Avg_outbound_agent_interaction_time_hms__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>ACSFCCP_HistoricalReportData__c.Contact_flow_time__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Contact_flow_time_hms__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>ACSFCCP_HistoricalReportData__c.Contact_handle_time__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Contact_handle_time_hms__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -343,6 +413,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Customer_hold_time_hms__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>ACSFCCP_HistoricalReportData__c.EndInterval__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -353,7 +428,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Error_status_time_hms__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>ACSFCCP_HistoricalReportData__c.Maximum_queued_time__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Maximum_queued_time_hms__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -363,7 +448,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Nonproductive_time_hms__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>ACSFCCP_HistoricalReportData__c.Not_Available_time__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Not_Available_time_hms__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -374,6 +469,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>ACSFCCP_HistoricalReportData__c.Online_time__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ACSFCCP_HistoricalReportData__c.Online_time_hms__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
