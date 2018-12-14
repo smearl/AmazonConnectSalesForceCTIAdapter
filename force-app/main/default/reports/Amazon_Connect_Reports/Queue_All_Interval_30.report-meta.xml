@@ -7,6 +7,27 @@
         <field>ACSFCCP_HistoricalReportData__c.Queue__c</field>
     </columns>
     <columns>
+        <field>ACSFCCP_HistoricalReportData__c.StartInterval__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.EndInterval__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.After_contact_work_time_hms__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Agent_answer_rate__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Agent_idle_time_hms__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Agent_interaction_time_hms__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Agent_on_contact_time_hms__c</field>
+    </columns>
+    <columns>
         <field>ACSFCCP_HistoricalReportData__c.Average_queue_abandon_time_hms__c</field>
     </columns>
     <columns>
@@ -25,10 +46,19 @@
         <field>ACSFCCP_HistoricalReportData__c.Average_agent_interaction_time_hms__c</field>
     </columns>
     <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Avg_outbound_after_contact_work_time_hms__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Avg_outbound_agent_interaction_time_hms__c</field>
+    </columns>
+    <columns>
         <field>ACSFCCP_HistoricalReportData__c.Contacts_abandoned__c</field>
     </columns>
     <columns>
         <field>ACSFCCP_HistoricalReportData__c.Contacts_handled__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contact_flow_time__c</field>
     </columns>
     <columns>
         <field>ACSFCCP_HistoricalReportData__c.Contacts_handled_incoming__c</field>
@@ -46,6 +76,9 @@
         <field>ACSFCCP_HistoricalReportData__c.Contacts_hold_customer_disconnect__c</field>
     </columns>
     <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_abandoned_in_120_seconds__c</field>
+    </columns>
+    <columns>
         <field>ACSFCCP_HistoricalReportData__c.Contacts_queued__c</field>
     </columns>
     <columns>
@@ -53,6 +86,144 @@
     </columns>
     <columns>
         <field>ACSFCCP_HistoricalReportData__c.Service_level_120_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_abandoned_in_15_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_abandoned_in_180_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_abandoned_in_20_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_abandoned_in_240_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_abandoned_in_25_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_abandoned_in_300_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_abandoned_in_30_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_abandoned_in_45_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_abandoned_in_600_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_abandoned_in_60_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_abandoned_in_90_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_agent_hung_up_first__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_120_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_15_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_180_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_20_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_In_240_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_25_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_300_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_30_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_45_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_600_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_60_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_answered_in_90_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_Consulted__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_Incoming__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_missed__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_put_on_hold__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_transferred_in__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_transferred_in_from_queue__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_transferred_out__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_transferred_out_external__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_transferred_out_from_queue__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Contacts_transferred_out_internal__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Customer_hold_time_hms__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Maximum_queued_time_hms__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Service_level_15_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Service_level_180_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Service_level_20_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Service_level_240_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Service_level_25_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Service_level_300_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Service_level_30_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Service_level_45_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Service_level_600_seconds__c</field>
+    </columns>
+    <columns>
+        <field>ACSFCCP_HistoricalReportData__c.Service_level_90_seconds__c</field>
     </columns>
     <filter>
         <criteriaItems>
