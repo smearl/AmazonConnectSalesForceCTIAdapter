@@ -382,6 +382,10 @@
                 <behavior>Edit</behavior>
                 <field>Contacts_transferred_out_from_queue__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Agent_interaction_time_hms__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

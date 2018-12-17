@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fullName>Agent_on_contact_time_hms__c</fullName>
+  <externalId>false</externalId>
+  <formula>IF((FLOOR(Agent_on_contact_time__c/3600))&lt;10, &quot;0&quot; + TEXT(FLOOR(Agent_on_contact_time__c/3600)), TEXT(FLOOR(Agent_on_contact_time__c/3600))) + &quot;:&quot; + IF ((MOD(Agent_on_contact_time__c,3600)/60)&lt;10, &quot;0&quot; + TEXT(FLOOR(MOD(Agent_on_contact_time__c,3600)/60)), TEXT(FLOOR(MOD(Agent_on_contact_time__c,3600)/60))) + &quot;:&quot; + IF((MOD(MOD(Agent_on_contact_time__c,3600),60))&lt;10, &quot;0&quot;+TEXT(FLOOR(MOD(MOD(Agent_on_contact_time__c,3600),60))), TEXT(FLOOR(MOD(MOD(Agent_on_contact_time__c,3600),60))))</formula>
+  <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+  <label>Agent_on_contact_time_hms</label>
+  <required>false</required>
+  <trackTrending>false</trackTrending>
+  <type>Text</type>
+  <unique>false</unique>
+</CustomField>
