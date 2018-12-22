@@ -17,3 +17,4 @@ REM
 echo Deploying metadata...
 call sfdx force:mdapi:deploy -u WW25 -d mdapioutput/ -w 100
 rem  sfdx force:mdapi:deploy -u whitewalker -d mdapioutput/ -w 100
+rem  sfdx force:mdapi:deploy -u obcamp -d mdapioutput/ -w 100

@@ -54,4 +54,39 @@ global with sharing class ACSFCCP_CallInformationController {
 
     return callInformation;
   }
+
+  @RemoteAction
+  global static List<ServicePresenceStatusHolder> getServicePresenceStatuses() {
+    List<ServicePresenceStatusHolder> statuses = new List<ServicePresenceStatusHolder>();
+
+    try {
+      System.Type t = Type.forName('ServicePresenceStatus');
+
+      List<SObject> results = Database.query('Select Id, DeveloperName, MasterLabel FROM ServicePresenceStatus');
+
+      for (SObject so : results) {
+        statuses.add(new ServicePresenceStatusHolder(so.Id, so.get('DeveloperName').toString(), so.get('MasterLabel').toString()));
+      }
+    }
+    catch(Exception e) {
+      System.debug('********** ' + e.getMessage());
+    }
+
+    return statuses;
+  }
+
+  global class ServicePresenceStatusHolder {
+    public String id {get; set;}
+    public String developerName {get; set;}
+    public String masterLabel {get; set;}
+
+    public ServicePresenceStatusHolder() {
+    }
+
+    public ServicePresenceStatusHolder(String id, String developerName, String masterLabel) {
+      this.id = id;
+      this.developerName = developerName;
+      this.masterLabel = masterLabel;
+    }
+  }
 }

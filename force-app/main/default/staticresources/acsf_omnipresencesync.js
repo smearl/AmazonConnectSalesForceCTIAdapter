@@ -20,8 +20,12 @@ limitations under the License.
 
   if (!sforce.console.isInConsole()) {
     ctx.ACSFIntegration.OmniPresenceSync = {
-      onAgentHandler : function() {
-        connect.getLog().info("ACSFIntegration:OmniPresenceSync:onAgentHandler not in console");
+      onAgentHandler: function() {
+        connect
+          .getLog()
+          .info(
+            "ACSFIntegration:OmniPresenceSync:onAgentHandler not in console"
+          );
       }
     };
 
@@ -33,30 +37,74 @@ limitations under the License.
       var matchingStates = agent.getAgentStates().filter(function(state) {
         return state.name.replace(" ", "_") === stateName;
       });
-      if (matchingStates.length === 1 && matchingStates[0].name !== agent.getState().name) {
+      if (
+        matchingStates.length === 1 &&
+        matchingStates[0].name !== agent.getState().name
+      ) {
         agent.setState(matchingStates[0], {
           success: function() {
-            connect.getLog().info("ACSFIntegration:OmniPresenceSync:setConnectAgentState " +
-                                  "AC agent state set to " + matchingStates[0].name);
+            connect
+              .getLog()
+              .info(
+                "ACSFIntegration:OmniPresenceSync:setConnectAgentState " +
+                  "AC agent state set to " +
+                  matchingStates[0].name
+              );
           },
           failure: function() {
-            connect.getLog().error("ACSFIntegration:OmniPresenceSync:setConnectAgentState " +
-                                  "unable to set AC agent state to " + matchingStates[0].name);
+            connect
+              .getLog()
+              .error(
+                "ACSFIntegration:OmniPresenceSync:setConnectAgentState " +
+                  "unable to set AC agent state to " +
+                  matchingStates[0].name
+              );
           }
         });
       }
     });
   }
 
+  var _namespacePrefix;
+
   ctx.ACSFIntegration.OmniPresenceSync = {
-    onAgentHandler : function() {
-      connect.getLog().info("ACSFIntegration:OmniPresenceSync:onAgentHandler invoked");
+    onAgentHandler: function(namespacePrefix) {
+      connect
+        .getLog()
+        .info("ACSFIntegration:OmniPresenceSync:onAgentHandler invoked");
+
+        _namespacePrefix = namespacePrefix;
+
+      var servicePresenceStatusMap = new Map();
+
+      Visualforce.remoting.Manager.invokeAction(
+        _namespacePrefix +
+          "ACSFCCP_CallInformationController.getServicePresenceStatuses",
+        function(result, event) {
+          if (event.status && result) {
+            result.forEach(function(record) {
+              var key = record.developerName;
+              var value = record.id.substr(0, 15);
+              servicePresenceStatusMap.set(key, value);
+            });
+          } else {
+            console.log(
+              "ACSFIntegration:OmniPresenceSync: " + JSON.stringify(event)
+            );
+          }
+        }
+      );
 
       sforce.console.addEventListener(
         sforce.console.ConsoleEvent.PRESENCE.STATUS_CHANGED,
         function(result) {
-          connect.getLog().info("ACSFIntegration:OmniPresenceSync:onAgentHandler:OmniStatusChangedHandler invoked; " +
-                                "Omni status changed to " + result.statusApiName);
+          connect
+            .getLog()
+            .info(
+              "ACSFIntegration:OmniPresenceSync:onAgentHandler:OmniStatusChangedHandler invoked; " +
+                "Omni status changed to " +
+                result.statusApiName
+            );
           var omniStatus = result.statusApiName;
           setConnectAgentState(omniStatus);
         }
@@ -65,73 +113,82 @@ limitations under the License.
       sforce.console.addEventListener(
         sforce.console.ConsoleEvent.PRESENCE.LOGOUT,
         function() {
-          connect.getLog().info("ACSFIntegration:OmniPresenceSync:onAgentHandler:OmniLogoutHandler invoked; Logged out of Omni");
+          connect
+            .getLog()
+            .info(
+              "ACSFIntegration:OmniPresenceSync:onAgentHandler:OmniLogoutHandler invoked; Logged out of Omni"
+            );
           setConnectAgentState("Offline");
         }
       );
 
-      var sps = new SObjectModel.ServicePresenceStatus();
-      var servicePresenceStatusMap = new Map();
-      sps.retrieve({}, function(err, records, event) {
-        if (err) {
-          connect.getLog().error("ACSFIntegration:OmniPresenceSync:onAgentHandler " +
-                                 "unable to retrieve Omni Presence statuses.")
-                          .withObject(err);
-        }
-        else {
-          records.forEach(function(record) {
-            var key = record.get("DeveloperName");
-            var value = record.get("Id").substr(0, 15);
-            servicePresenceStatusMap.set(key, value);
-          });
-        }
-      });
-
       connect.agent(function(agent) {
         agent.onStateChange(function(stateChange) {
-          connect.getLog().info("ACSFIntegration:OmniPresenceSync:onAgentHandler:AgentOnStateChangeHandler invoked; " +
-                                "AC agent state changed to " + stateChange.newState);
+          connect
+            .getLog()
+            .info(
+              "ACSFIntegration:OmniPresenceSync:onAgentHandler:AgentOnStateChangeHandler invoked; " +
+                "AC agent state changed to " +
+                stateChange.newState
+            );
           var newStateName = stateChange.newState.replace(" ", "_");
 
           if (newStateName === "Offline") {
-            sforce.console.presence.getServicePresenceStatusId(function(getStatusResult) {
+            sforce.console.presence.getServicePresenceStatusId(function(
+              getStatusResult
+            ) {
               if (getStatusResult.success) {
                 sforce.console.presence.logout(function(logoutResult) {
                   if (logoutResult.success) {
-                    connect.getLog().info("ACSFIntegrationOmniPresenceSync:onAgentHandler:AgentOnStateChangeHandler logged out of Omni");
-                  }
-                  else {
-                    connect.getLog().error("ACSFIntegrationOmniPresenceSync:onAgentHandler:AgentOnStateChangeHandler unable to log out of Omni")
-                                    .withObject(logoutResult);
+                    connect
+                      .getLog()
+                      .info(
+                        "ACSFIntegrationOmniPresenceSync:onAgentHandler:AgentOnStateChangeHandler logged out of Omni"
+                      );
+                  } else {
+                    connect
+                      .getLog()
+                      .error(
+                        "ACSFIntegrationOmniPresenceSync:onAgentHandler:AgentOnStateChangeHandler unable to log out of Omni"
+                      )
+                      .withObject(logoutResult);
                   }
                 });
               }
             });
-          }
-          else if (servicePresenceStatusMap.has(newStateName)) {
+          } else if (servicePresenceStatusMap.has(newStateName)) {
             var statusId = servicePresenceStatusMap.get(newStateName);
 
-            sforce.console.presence.getServicePresenceStatusId(
-              function(getStatusResult) {
-                var currentStatusId = getStatusResult.statusId;
-                if (currentStatusId !== statusId) {
-                  sforce.console.presence.setServicePresenceStatus(
-                    statusId,
-                    function(setStatusResult) {
-                      if (setStatusResult.success) {
-                        connect.getLog().info("ACSFIntegration:OmniPresenceSync:onAgentHandler:AgentOnStateChangeHandler " +
-                                              "Omni state set to " + newStateName);
-                      }
-                      else {
-                        connect.getLog().error("ACSFIntegration:OmniPresenceSync:onAgentHandler:AgentOnStateChangeHandler " +
-                                               "unable to set Omni state to " + newStateName)
-                                        .withObject(setStatusResult);
-                      }
+            sforce.console.presence.getServicePresenceStatusId(function(
+              getStatusResult
+            ) {
+              var currentStatusId = getStatusResult.statusId;
+              if (currentStatusId !== statusId) {
+                sforce.console.presence.setServicePresenceStatus(
+                  statusId,
+                  function(setStatusResult) {
+                    if (setStatusResult.success) {
+                      connect
+                        .getLog()
+                        .info(
+                          "ACSFIntegration:OmniPresenceSync:onAgentHandler:AgentOnStateChangeHandler " +
+                            "Omni state set to " +
+                            newStateName
+                        );
+                    } else {
+                      connect
+                        .getLog()
+                        .error(
+                          "ACSFIntegration:OmniPresenceSync:onAgentHandler:AgentOnStateChangeHandler " +
+                            "unable to set Omni state to " +
+                            newStateName
+                        )
+                        .withObject(setStatusResult);
                     }
-                  );
-                }
+                  }
+                );
               }
-            );
+            });
           }
         });
       });

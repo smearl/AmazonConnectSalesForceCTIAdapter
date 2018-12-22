@@ -71,10 +71,8 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
     <apex:slds />
 
-    <apex:remoteObjects>
-        <apex:remoteObjectModel name="ServicePresenceStatus" fields="Id, DeveloperName, MasterLabel" />
-
-        <apex:remoteObjectModel name="Call_Attributes_Configuration__mdt" fields="Id" jsShorthand="Call_Attributes_Configuration">
+    <apex:remoteObjects >
+            <apex:remoteObjectModel name="Call_Attributes_Configuration__mdt" fields="Id" jsShorthand="Call_Attributes_Configuration">
             <apex:remoteObjectField name="Attribute_Name__c" jsShorthand="Attribute_Name" />
             <apex:remoteObjectField name="CCP_Attribute_Label__c" jsShorthand="CCP_Attribute_Label" />
         </apex:remoteObjectModel>
@@ -226,7 +224,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             var connectAutoLogin = 0;
 
             var loadACSFIntegration = function () {
-                ctx.ACSFIntegration.OmniPresenceSync.onAgentHandler();
+                ctx.ACSFIntegration.OmniPresenceSync.onAgentHandler("{!namespacePagePrefix}");
                 ctx.ACSFIntegration.PostCallTask.onAgentHandler("{!namespacePagePrefix}", "{!$Label.ACSFCCP_PostCallTaskTabName}", ccSettings);
                 ctx.ACSFIntegration.CallAttributesDisplay.onAgentHandler();
                 ctx.ACSFIntegration.AutoCallCampaign.onAgentHandler(ccSettings);

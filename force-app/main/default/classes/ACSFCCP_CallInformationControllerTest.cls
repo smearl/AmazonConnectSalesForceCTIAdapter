@@ -37,8 +37,12 @@ private class ACSFCCP_CallInformationControllerTest {
       String info = '{"contactId" : "123123-1231-1123123", "data" : "123"}';
       String result = ACSFCCP_CallInformationController.storeCallInformation(info);
       System.assertEquals('12312312311123123', result);
+  }
 
-    
-    
+  @isTest
+  static void testGetServicePresenceStatuses() {
+
+    Object result = ACSFCCP_CallInformationController.getServicePresenceStatuses();
+    System.assert(result != null);
   }
 }
