@@ -13,45 +13,63 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-global with sharing class ACSFCCP_CallInformationController {
-  public static final String CACHE_PARTITION_PREFIX = 'ACSFCCP';
-  public static final String CACHE_TEST_KEY = 'TESTKEY';
-  public static final String CACHE_TEST_VALUE = 'TEST-VALUE';
+@isTest
+private class ACSFCCP_CallInformationControllerTest {
+  @isTest
+  static void testStoreAndCallInfo() {
+    if (ACSFCCP_CallInformationController.isPlatformCacheAvailable()) {
+      String info = '{"contactId" : "testContact", "data" : "123"}';
+      ACSFCCP_CallInformationController.storeCallInformation(info);
+      Map<String, String> result = ACSFCCP_CallInformationController.returnCallInformation('testContact');
 
-  public ACSFCCP_CallInformationController(ACSFCCP_NamespaceController controller) { }
-
-  @RemoteAction
-  global static Boolean isPlatformCacheAvailable() {
-    try {
-      Cache.Org.put(CACHE_PARTITION_PREFIX + CACHE_TEST_KEY, CACHE_TEST_VALUE, 301);
-      String cacheVal = (String) Cache.Org.get(CACHE_PARTITION_PREFIX + CACHE_TEST_KEY);
-      return cacheVal == CACHE_TEST_VALUE;
-    }
-    catch (Exception e) {
-      return false;
-    }
-  }
-
-  @RemoteAction
-  global static String storeCallInformation(string properties) {
-    Map<String, String> callInformation = (Map<String, String>) JSON.deserialize(properties, Map<String, String>.class);
-    String cid = callInformation.get('contactId').replace('-', '');
-    Cache.Org.put(CACHE_PARTITION_PREFIX + cid, properties, 7200);
-    return cid;
-  }
-
-  @RemoteAction
-  global static Map<String, String> returnCallInformation(string contactId) {
-    Map<String, String> callInformation = new Map<String, String>();
-
-    if (!String.isBlank(contactId)) {
-      String cid = contactId.replace('-', '');
-      String information = (String) Cache.Org.get(CACHE_PARTITION_PREFIX + cid);
-      if (information != null) {
-        callInformation = (Map<String, String>) JSON.deserialize(information, Map<String, String>.class);
+      if (result == null || result.get('data') == null) {
+        // Platform cache is configured but no space is allocated.
+        System.assert(true);
+      } else {
+        System.assertEquals('123', result.get('data'));
       }
     }
-
-    return callInformation;
   }
+
+  @isTest
+  static void testStoreCallInformation() {
+    if (ACSFCCP_CallInformationController.isPlatformCacheAvailable()) {
+      String info = '{"contactId" : "123123-1231-1123123", "data" : "123"}';
+      String result = ACSFCCP_CallInformationController.storeCallInformation(info);
+      System.assertEquals('12312312311123123', result);
+
+    }
+  }
+
+@isTest
+  static void testStoreCallInformationNoCache() {
+      String info = '{"contactId" : "123123-1231-1123123", "data" : "123"}';
+      String result = ACSFCCP_CallInformationController.storeCallInformation(info);
+      System.assertEquals('12312312311123123', result);
+  }
+
+
+  @isTest
+  static void testGetServicePresenceStatuses() {
+
+    List<ACSFCCP_CallInformationController.ServicePresenceStatusHolder> result = ACSFCCP_CallInformationController.getServicePresenceStatuses();
+    System.assert(result.size() >= 0);
+
+    System.assert(result.get(0).id != null);
+    System.assert(result.get(0).developerName != null);
+    System.assert(result.get(0).masterLabel != null);
+  }
+
+  @isTest
+  static void testConstructor(){
+      ACSFCCP_CallInformationController.ServicePresenceStatusHolder obj = new ACSFCCP_CallInformationController.ServicePresenceStatusHolder('A','A','A');
+
+      System.assert(obj.id != null);
+      System.assert(obj.developerName != null);
+      System.assert(obj.masterLabel != null);
+
+
+  }
+
 }
+
