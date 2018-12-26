@@ -43,7 +43,7 @@
         <items>
             <label>Amazon Connect CCP URL</label>
             <name>reqConnectURL</name>
-            <value>https://yourinstance.awsapps.com/connect/ccp</value>
+            <value>https://wfamzsfdc.awsapps.com/connect/ccp</value>
         </items>
         <items>
             <label>Amazon Connect CCP SSO URL</label>

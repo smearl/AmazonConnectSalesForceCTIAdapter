@@ -1,6 +1,6 @@
 // acsf_screenpopmanager
 // MD - this is meant for classic
-(function(ctx) {
+(function (ctx) {
 
     var ACSF_SCREEN_POP_RECORD_ATTRIBUTE_KEY = 'acsf-screenpop-record';
     var ACSF_SCREEN_POP_SEARCH_ATTRIBUTE_KEY = 'acsf-screenpop-search';
@@ -13,7 +13,7 @@
 
     function setSoftphoneVisible() {
         sforce.interaction && sforce.interaction.setVisible(true);
-        sforce.opencti && sforce.opencti.setSoftphonePanelVisibility({visible: true});
+        sforce.opencti && sforce.opencti.setSoftphonePanelVisibility({ visible: true });
     }
 
     function ctiSearchAndPop(searchParams, queryParams, callType) {
@@ -46,7 +46,7 @@
             connect.getLog().info("ACSFIntegration:ScreenpopManager:ctiPop:Response:" + JSON.stringify(response));
             try {
                 if (response.success || response.result) {
-                    connect.getLog().info("ACSFIntegration:ScreenpopManager:ctiPop:Result:" +JSON.stringify(response.returnValue || response.result));
+                    connect.getLog().info("ACSFIntegration:ScreenpopManager:ctiPop:Result:" + JSON.stringify(response.returnValue || response.result));
                 } else {
                     connect.getLog().info("ACSFIntegration:ScreenpopManager:ctiPop:Error:" + (response.error || JSON.stringify(response.errors)));
                 }
@@ -67,18 +67,18 @@
 
     function cbGetPageInfo(response) {
         if (response.result) {
-            connect.getLog().info("ACSFIntegration:cbGetPageInfo:"+ response.result);
+            connect.getLog().info("ACSFIntegration:cbGetPageInfo:" + response.result);
         } else {
-            connect.getLog().error("ACSFIntegration:cbGetPageInfo:Error:"+ response.error);
+            connect.getLog().error("ACSFIntegration:cbGetPageInfo:Error:" + response.error);
         }
     };
 
-    function searchAndPopAni(contact, connectPhoneFormat ) {
+    function searchAndPopAni(contact, connectPhoneFormat) {
         connect.getLog().info("ACSFIntegration:ScreenpopManager:searchAndPopAni:InboundPhone:Invoked");
         var phoneNumber = contact.getInitialConnection().getAddress().phoneNumber;
         connect.getLog().info("ACSFIntegration:ScreenpopManager:searchAndPopAni:InboundPhone:PN:" + phoneNumber);
         var phoneParsed = libphonenumber.parse(phoneNumber, { country: { default: connectPhoneFormat.Country } });
-        connect.getLog().info("ACSFIntegration:ScreenpopManager:searchAndPopAni:InboundPhone:Parsed:"+phoneParsed.country+"|"+phoneParsed.phone);
+        connect.getLog().info("ACSFIntegration:ScreenpopManager:searchAndPopAni:InboundPhone:Parsed:" + phoneParsed.country + "|" + phoneParsed.phone);
 
         connect.getLog().info("ACSFIntegration:ScreenpopManager:searchAndPopAni:GPICall");
         sforce.interaction && sforce.interaction.getPageInfo(cbGetPageInfo);
@@ -86,7 +86,7 @@
         ctiSearchAndPop(phoneParsed.phone, '', 'inbound');
     }
 
-    function popRecordOrSearch(contact, connectPhoneFormat ) {
+    function popRecordOrSearch(contact, connectPhoneFormat) {
         var attributes = contact.getAttributes();
         connect.getLog().info("ACSFIntegration:ScreenpopManager:popRecordOrSearch:attributes:" + JSON.stringify(attributes));
 
@@ -110,7 +110,7 @@
 
     //entrypoint
     ctx.ACSFIntegration.ScreenpopManager = {
-        onConnecting: function(contact, connectPhoneFormat) {
+        onConnecting: function (contact, connectPhoneFormat) {
             connect.getLog().info("ACSFIntegration:ScreenpopManager:onConnecting");
             setSoftphoneVisible();
 
