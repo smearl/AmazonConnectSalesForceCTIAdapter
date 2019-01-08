@@ -376,7 +376,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                         connect.getLog().error("ConnectSFCCP:onIncoming:Error:").withException(e);
                     }
 
-
                     try {
                         contact.onAccepted(function () {
                             ctx.ACSFIntegration.CallInformation.onAccepted(contact);

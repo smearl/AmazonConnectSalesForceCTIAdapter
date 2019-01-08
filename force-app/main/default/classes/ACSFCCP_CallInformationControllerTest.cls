@@ -31,18 +31,45 @@ private class ACSFCCP_CallInformationControllerTest {
     }
   }
 
-  @isTest  
+  @isTest
   static void testStoreCallInformation() {
-    
+    if (ACSFCCP_CallInformationController.isPlatformCacheAvailable()) {
+      String info = '{"contactId" : "123123-1231-1123123", "data" : "123"}';
+      String result = ACSFCCP_CallInformationController.storeCallInformation(info);
+      System.assertEquals('12312312311123123', result);
+
+    }
+  }
+
+@isTest
+  static void testStoreCallInformationNoCache() {
       String info = '{"contactId" : "123123-1231-1123123", "data" : "123"}';
       String result = ACSFCCP_CallInformationController.storeCallInformation(info);
       System.assertEquals('12312312311123123', result);
   }
 
+
   @isTest
   static void testGetServicePresenceStatuses() {
 
-    Object result = ACSFCCP_CallInformationController.getServicePresenceStatuses();
-    System.assert(result != null);
+    List<ACSFCCP_CallInformationController.ServicePresenceStatusHolder> result = ACSFCCP_CallInformationController.getServicePresenceStatuses();
+    System.assert(result.size() >= 0);
+
+    System.assert(result.get(0).id != null);
+    System.assert(result.get(0).developerName != null);
+    System.assert(result.get(0).masterLabel != null);
   }
+
+  @isTest
+  static void testConstructor(){
+      ACSFCCP_CallInformationController.ServicePresenceStatusHolder obj = new ACSFCCP_CallInformationController.ServicePresenceStatusHolder('A','A','A');
+
+      System.assert(obj.id != null);
+      System.assert(obj.developerName != null);
+      System.assert(obj.masterLabel != null);
+
+
+  }
+
 }
+
