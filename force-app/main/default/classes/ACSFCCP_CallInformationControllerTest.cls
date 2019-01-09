@@ -31,12 +31,72 @@ private class ACSFCCP_CallInformationControllerTest {
     }
   }
 
-  @isTest  
+  @isTest
   static void testStoreCallInformation() {
-    
+    if (ACSFCCP_CallInformationController.isPlatformCacheAvailable()) {
       String info = '{"contactId" : "123123-1231-1123123", "data" : "123"}';
       String result = ACSFCCP_CallInformationController.storeCallInformation(info);
       System.assertEquals('12312312311123123', result);
+
+    }
+  }
+
+  @isTest
+  static void getTaskDetails() {
+    Task t  = new Task();
+
+    ACSFCCP_CallInformationController.TaskDetails td = ACSFCCP_CallInformationController.getTaskDetails(t.Id);
+
+    System.assert(td != null);
+
+    System.assert(String.isEmpty(td.whoId));
+
+    System.assert(String.isEmpty(td.whatId));
+  }
+
+  @isTest(SeeAllData=true)
+  static void getTaskDetailsForContact() {
+    Integer count = [Select Count() From Contact];
+
+    Integer rand = Math.floor(Math.random() * count).intValue();
+
+    List<Contact> contacts = (List<Contact>) Database.query('Select Id, Name From Contact Order By Id Asc Limit 1 OFFSET :rand');
+
+    Contact c = contacts.get(0);
+
+    ACSFCCP_CallInformationController.TaskDetails td = ACSFCCP_CallInformationController.getTaskDetails(c.Id);
+
+    System.assert(!String.isEmpty(td.whoId));
+  }
+
+  @isTest(SeeAllData=true)
+  static void getTaskDetailsForAccount() {
+    Integer count = [Select Count() From Account];
+
+    Integer rand = Math.floor(Math.random() * count).intValue();
+
+    List<Account> accounts = (List<Account>) Database.query('Select Id, Name From Account Order By Id Asc Limit 1 OFFSET :rand');
+
+    Account a = accounts.get(0);
+
+    ACSFCCP_CallInformationController.TaskDetails td = ACSFCCP_CallInformationController.getTaskDetails(a.Id);
+
+    System.assert(!String.isEmpty(td.whatId));
+  }
+
+  @isTest(SeeAllData=true)
+  static void getTaskDetailsForLead() {
+    Integer count = [Select Count() From Lead];
+
+    Integer rand = Math.floor(Math.random() * count).intValue();
+
+    List<Lead> leads = (List<Lead>) Database.query('Select Id, Name From Lead Order By Id Asc Limit 1 OFFSET :rand');
+
+    Lead l = leads.get(0);
+
+    ACSFCCP_CallInformationController.TaskDetails td = ACSFCCP_CallInformationController.getTaskDetails(l.Id);
+
+    System.assert(!String.isEmpty(td.whoId));
   }
 
   @isTest
@@ -44,5 +104,14 @@ private class ACSFCCP_CallInformationControllerTest {
 
     Object result = ACSFCCP_CallInformationController.getServicePresenceStatuses();
     System.assert(result != null);
+
+    ACSFCCP_CallInformationController.ServicePresenceStatusHolder spsh = new ACSFCCP_CallInformationController.ServicePresenceStatusHolder();
+    spsh.id = 'A';
+    spsh.masterLabel = 'A';
+    spsh.developerName = 'A';
+
+    System.assertEquals(spsh.id, 'A');
+    System.assertEquals(spsh.masterLabel, 'A');
+    System.assertEquals(spsh.developerName, 'A');
   }
 }

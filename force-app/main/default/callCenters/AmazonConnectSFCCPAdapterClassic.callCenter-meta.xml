@@ -120,6 +120,21 @@
             <name>reqConnectPhoneFormat</name>
             <value>{&quot;OPF&quot;:&quot;0&quot;,&quot;NPF&quot;:&quot;1&quot;,&quot;Country&quot;:&quot;US&quot;,&quot;NF&quot;:&quot;International_plaintext&quot;,&quot;TNF&quot;:&quot;(555) 123-4567&quot;}</value>
         </items>
+        <items>
+            <label>Call Task Action</label>
+            <name>reqTaskAction</name>
+            <value>end</value>
+        </items>
+        <items>
+            <label>Call Task Custom Page</label>
+            <name>reqTaskPage</name>
+            <value></value>
+        </items>
+        <items>
+            <label>Call Task Include Agent Friendy Name</label>
+            <name>reqTaskIncludeAgentFriendlyName</name>
+            <value>true</value>
+        </items>
         <label>Amazon Connect Information</label>
         <name>reqConnectSFCCPOptions</name>
     </sections>

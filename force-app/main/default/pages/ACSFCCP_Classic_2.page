@@ -38,10 +38,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
 
 <apex:page id="ACSFCCP_Classic_2" showHeader="false">
-    <apex:includeScript value="/support/api/40.0/interaction.js" />
-    <apex:includeScript value="/support/console/40.0/integration.js" />
-    <apex:includeScript value="{!$Resource.amazonconnectstreams}" />
-    <apex:includeScript value="{!$Resource.libphonenumberjs_2}" />
+    <apex:includeScript value="/support/api/44.0/interaction.js"/>
+    <apex:includeScript value="/support/console/44.0/integration.js"/>
+    <apex:includeScript value="{!$Resource.amazonconnectstreams}"/>
+    <apex:includeScript value="{!$Resource.libphonenumberjs_2}"/>
 
     <apex:includeScript value="{!$Resource.acsf_screenpopmanager}" />
 
@@ -290,12 +290,22 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
                                         var phoneParsed = libphonenumber.parse(phoneContact.number.toString(), { country: { default: connectPhoneFormat.Country } });
                                         connect.getLog().info("ConnectSFCCP:cbInConsole:Classic:onClickListener:OK:Parsed:" + phoneParsed.country + "|" + phoneParsed.phone);
                                         var e164PhoneNumber = libphonenumber.format(phoneParsed.phone, phoneParsed.country, connectPhoneFormat.NF);
-                                        connect.getLog().info("ConnectSFCCP:cbInConsole:Classic:onClickListener:OK:h164Number:" + e164PhoneNumber);
-                                        agent.connect(connect.Address.byPhoneNumber(e164PhoneNumber), {});
-                                        connect.getLog().info("ConnectSFCCP:cbInConsole:Classic:onClickListener:OK:AgentConnect");
-                                        sforce.interaction.setVisible(true);
-                                        connect.getLog().info("ConnectSFCCP:cbInConsole:Classic:onClickListener:OK:setVisible");
-                                        connect.getLog().info("ConnectSFCCP:cbInConsole:Classic:onClickListener:OK:GP:" + agent.getPermissions());
+                                        connect.getLog().info("ConnectSFCCP:cbInConsole:Classic:onClickListener:OK:h164Number:"+ e164PhoneNumber);
+                                        var endpoint = connect.Address.byPhoneNumber(e164PhoneNumber);
+
+                                        if (agent && agent.getContacts() && agent.getContacts().length <= 1) {
+                                            if (agent.getContacts().length === 0) {
+                                                agent.connect(endpoint, {});
+                                                connect.getLog().info("ConnectSFCCP:cbInConsole:Classic:onClickListener:OK:AgentConnect");
+                                            } else {
+                                                agent.getContacts()[0].addConnection(endpoint, {});
+                                                connect.getLog().info("ConnectSFCCP:cbInConsole:Classic:onClickListener:OK:ContactAddConnection");
+                                            }
+
+                                            sforce.opencti.setSoftphonePanelVisibility({visible: true});
+                                            connect.getLog().info("ConnectSFCCP:cbInConsole:Classic:onClickListener:OK:setVisible");
+                                            connect.getLog().info("ConnectSFCCP:cbInConsole:Classic:onClickListener:OK:GP:" + agent.getPermissions());
+                                        }
                                     }
                                 } catch (e) {
                                     connect.getLog().error("ConnectSFCCP:cbInConsole:Classic:onClickListener:Error:").withException(e);
@@ -362,7 +372,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
 
             var cbCCSettings = function (response) {
                 if (response.result) {
-                    //connect.getLog().info("ConnectSFCCP:cbCCSettings:OK:" + response.result);
+                    connect.getLog().info("ConnectSFCCP:cbCCSettings:OK");
                     ccSettings = JSON.parse(response.result);
                     sforce.interaction.isInConsole(cbInConsole);
                 }

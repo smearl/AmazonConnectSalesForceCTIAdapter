@@ -1,0 +1,49 @@
+<!--
+ - Created by smearl on 2018-12-23.
+ -->
+
+<apex:page id="ACSFCCP_ObjectType" lightningStylesheets="true" controller="ACSFCCP_ObjectTypeController" title="Create New Lead or Contact">
+    <apex:includeScript value="/support/console/44.0/integration.js"/>
+    <apex:slds />
+
+    <div class="slds-scope">
+        <apex:form>
+            <apex:pageBlock mode="maindetail" title="Create New Lead or Contact">
+                <apex:pageBlockSection columns="1">
+                    <apex:outputText>
+                        An object matching the inbound telephone number was not found.  What type of object would you like to create?
+                    </apex:outputText>
+                </apex:pageBlockSection>
+                <apex:pageBlockButtons location="bottom">
+                    <apex:commandButton onClick="openNewContactTab(); return false;" value="Create Contact" id="contactBtn" />
+                    <span>    </span>
+                    <apex:commandButton onClick="openNewLeadTab(); return false;" value="Create Lead" id="leadBtn" />
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+        </apex:form>
+    </div>
+
+    <script type="text/javascript">
+        function openNewContactTab() {
+            var newContactUrl = '{!URLFOR($Action.Contact.NewContact)}';
+
+            openTab(newContactUrl);
+        }
+
+        function openNewLeadTab() {
+            var newLeadUrl = '{!URLFOR($Action.Lead.New)}';
+
+            openTab(newLeadUrl);
+        }
+
+        function openTab(url) {
+            sforce.console.getEnclosingTabId(function(r1) {
+                var tabId = r1.id;
+
+                sforce.console.openPrimaryTab(null, url, true, null, function(r2) { });
+
+                sforce.console.closeTab(tabId);
+            });
+        }
+    </script>
+</apex:page>
