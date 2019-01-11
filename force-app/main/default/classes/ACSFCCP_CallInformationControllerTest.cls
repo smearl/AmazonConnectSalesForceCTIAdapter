@@ -15,6 +15,21 @@ limitations under the License.
 
 @isTest
 private class ACSFCCP_CallInformationControllerTest {
+
+  @TestSetup
+  static void setup()
+  {
+    Account a = new Account(Name='Test Acct 1', Phone='888-555-1212');
+    insert a;
+
+    Contact c = new Contact(LastName='Test', FirstName='Contact', Phone='888-555-1313', AccountId = a.Id);
+    insert c;
+
+    Lead l = new Lead(LastName='Test', FirstName='Lead', Phone='888-555-1414', Company='Test Company');
+    insert l;
+  }
+
+
   @isTest
   static void testStoreAndCallInfo() {
     if (ACSFCCP_CallInformationController.isPlatformCacheAvailable()) {
@@ -54,45 +69,27 @@ private class ACSFCCP_CallInformationControllerTest {
     System.assert(String.isEmpty(td.whatId));
   }
 
-  @isTest(SeeAllData=true)
-  static void getTaskDetailsForContact() {
-    Integer count = [Select Count() From Contact];
-
-    Integer rand = Math.floor(Math.random() * count).intValue();
-
-    List<Contact> contacts = (List<Contact>) Database.query('Select Id, Name From Contact Order By Id Asc Limit 1 OFFSET :rand');
-
-    Contact c = contacts.get(0);
-
-    ACSFCCP_CallInformationController.TaskDetails td = ACSFCCP_CallInformationController.getTaskDetails(c.Id);
-
-    System.assert(!String.isEmpty(td.whoId));
-  }
-
-  @isTest(SeeAllData=true)
+  @isTest
   static void getTaskDetailsForAccount() {
-    Integer count = [Select Count() From Account];
-
-    Integer rand = Math.floor(Math.random() * count).intValue();
-
-    List<Account> accounts = (List<Account>) Database.query('Select Id, Name From Account Order By Id Asc Limit 1 OFFSET :rand');
-
-    Account a = accounts.get(0);
+    Account a = [SELECT Id FROM Account WHERE Name='Test Acct 1'];
 
     ACSFCCP_CallInformationController.TaskDetails td = ACSFCCP_CallInformationController.getTaskDetails(a.Id);
 
     System.assert(!String.isEmpty(td.whatId));
   }
 
-  @isTest(SeeAllData=true)
+  @isTest
+  static void getTaskDetailsForContact() {
+    Contact c = [SELECT Id FROM Contact WHERE LastName='Test'];
+
+    ACSFCCP_CallInformationController.TaskDetails td = ACSFCCP_CallInformationController.getTaskDetails(c.Id);
+
+    System.assert(!String.isEmpty(td.whoId));
+  }
+
+  @isTest
   static void getTaskDetailsForLead() {
-    Integer count = [Select Count() From Lead];
-
-    Integer rand = Math.floor(Math.random() * count).intValue();
-
-    List<Lead> leads = (List<Lead>) Database.query('Select Id, Name From Lead Order By Id Asc Limit 1 OFFSET :rand');
-
-    Lead l = leads.get(0);
+    Lead l = [SELECT Id FROM Lead WHERE LastName='Test'];
 
     ACSFCCP_CallInformationController.TaskDetails td = ACSFCCP_CallInformationController.getTaskDetails(l.Id);
 
