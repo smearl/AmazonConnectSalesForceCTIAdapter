@@ -43,9 +43,9 @@ limitations under the License.
       connect.contact(function(contact) {
         var conns = contact.getConnections();
         var custConn = conns.find(
-          c => c.getType() === connect.ConnectionType.INBOUND ||
-          c.getType() === connect.ConnectionType.OUTBOUND
-         );
+          c => c.getType() === connect.ConnectionType.INBOUND || c.getType() === connect.ConnectionType.OUTBOUND
+        )
+
         if (!custConn)
           return;
 
@@ -57,12 +57,14 @@ limitations under the License.
         var containsAtSymbol = phoneNumber.indexOf('@') > -1;
         setCallContextProperty('callPhoneNumber', phoneNumber.substring(0, containsAtSymbol ? phoneNumber.indexOf('@') : phoneNumber.length).replace('sip:', ''));
 
-        contact.onAccepted(function(contactOnAccepted) {
+        var taskAutoCreate = _ccSettings["/reqConnectSFCCPOptions/reqTaskAutoCreate"] || 'false';
+
+        contact.onAccepted(function(contactAccepted) {
           connect.getLog().info("ACSFIntegration:CallTask:onAgentHandler:ContactOnAcceptedHandler invoked");
           startActiveCall();
         });
 
-        contact.onConnecting(function(contactOnConnecting) {
+        contact.onConnected(function(contactConnected) {
           connect.getLog().info("ACSFIntegration:CallTask:onAgentHandler:ContactOnConnectedHandler invoked");
 
           connect.agent(function(agent) {
@@ -70,19 +72,17 @@ limitations under the License.
             setCallContextProperty('callAgentFriendlyName', agent.getName());
           });
 
-          if (contact.isInbound()) {
-            setCallContextProperty("callQueue", contact.getQueue().name || '');
+          if (contactConnected.isInbound()) {
+            setCallContextProperty("callQueue", contactConnected.getQueue().name || '');
             startActiveCall();
 
-            var callContext = getCurrentCallContext();
-
-            if (callContext.callActive && taskAction === 'start') {
-                popTaskOnStart(contactOnConnecting, callContext);
+            if (taskAutoCreate === 'true') {
+              saveInitialTask(contactConnected, getCurrentCallContext());
             }
           }
         });
 
-        contact.onEnded(function(contactOnEnded) {
+        contact.onEnded(function(contactEnded) {
           connect.getLog().info("ACSFIntegration:CallTask:onAgentHandler:ContactOnEndedHandler invoked");
 
           connect.agent(function(agent) {
@@ -91,13 +91,10 @@ limitations under the License.
           });
 
           setCallContextProperty("callEndTime", new Date().getTime());
-          setCallContextProperty("callQueue", contact.getQueue().name || '');
+          setCallContextProperty("callQueue", contactEnded.getQueue().name || '');
 
-          var callContext = getCurrentCallContext();
-          clearCallContext();
-
-          if (callContext.callActive && (taskAction === 'end' || taskAction === 'none')) {
-            popTaskOnEnd(contactOnEnded, callContext);
+          if (taskAutoCreate === 'true') {
+            updateTask(contactEnded, getCurrentCallContext());
           }
         });
       });
@@ -110,94 +107,129 @@ limitations under the License.
 
     var callStartDate = new Date();
 
-    setCallContextProperty("callStartTime", new Date().getTime());
+    setCallContextProperty("callStartTime", callStartDate.getTime());
     setCallContextProperty("callStartDate", callStartDate.toISOString());
     setCallContextProperty("callStartDateTime", callStartDate.toISOString().substr(0, 19).replace("T", " "));
   }
 
-  function popTaskOnStart(callContact, callContext) {
-    connect.getLog().info("ACSFIntegration:CallTask:popTaskOnStart invoked");
+  function saveInitialTask(contact, context) {
+    if (sforce.interaction) {
+      var initialTaskString = getInitialTaskString(contact, context);
 
-    saveTask(callContact, callContext);
+      connect.getLog().info("ACSFIntegration:CallTask:saveInitialTask saving task with URL parameters: " + initialTaskString);
+
+      sforce.interaction.saveLog("Task", initialTaskString, saveInitialTaskCallback);
+    }
+
+    if (sforce.opencti) {
+      var initialTaskObject = getInitialTaskObject(contact, context);
+
+      connect.getLog().info("ACSFIntegration:CallTask:saveInitialTask saving task with object: " + JSON.stringify(initialTaskObject));
+
+      sforce.opencti.saveLog({
+        value: initialTaskObject,
+        callback: saveInitialTaskCallback
+      });
+    }
   }
 
-  function popTaskOnEnd(callContact, callContext) {
-    connect.getLog().info("ACSFIntegration:CallTask:popTaskOnEnd invoked");
+  function saveInitialTaskCallback(response) {
+      if (response.success === false || response.result === null || response.returnValue === null) {
+        connect.getLog().error("ACSFIntegration:CallTask:saveInitialTask failed to save task").withObject(response.error);
+        return;
+      }
 
-    saveTask(callContact, callContext);
+      var taskId  = response.result || response.returnValue.recordId;
+
+      connect.getLog().info("ACSFIntegration:CallTask:saveInitialTask task saved. Id=" + taskId);
+
+      setCallContextProperty('callTaskId', taskId);
+
+      var taskAction = _ccSettings["/reqConnectSFCCPOptions/reqTaskAction"] || 'none';
+
+      if (taskAction === 'start') {
+          popTask(getCurrentCallContext());
+      }
   }
 
-  function saveTask(callContact, callContext) {
-    connect.getLog().info("ACSFIntegration:CallTask:saveTask saving task with URL parameters: " + getTaskString(callContact, callContext));
+  function updateTask(contact, context) {
+    if (context.callActive) {
+      if (sforce.interaction) {
+        var updateTaskString = getUpdateTaskString(contact, context);
 
-    sforce.interaction && sforce.interaction.saveLog("Task", encodeURI(getTaskString(callContact, callContext)), saveLogCallback);
+        connect.getLog().info("ACSFIntegration:CallTask:updateTask updating task with URL parameters: " + updateTaskString);
 
-    sforce.opencti && sforce.opencti.saveLog({
-      value: getTaskObject(callContact, callContext),
-      callback: saveLogCallback
-    });
-  }
+        sforce.interaction && sforce.interaction.saveLog("Task", updateTaskString, updateTaskCallback);
+      }
 
-  function getQueueName(callContext) {
-    if (callContext.callQueue && callContext.callQueue !== '') {
-      return callContext.callQueue;
+      if (sforce.opencti) {
+        var updateTaskObject = getUpdateTaskObject(contact, context);
+
+        connect.getLog().info("ACSFIntegration:CallTask:updateTask updating task with object: " + JSON.stringify(updateTaskObject));
+
+        sforce.opencti && sforce.opencti.saveLog({
+          value: updateTaskObject,
+          callback: updateTaskCallback
+        });
+      }
     }
     else {
-      var includeAgentFriendlyName = _ccSettings["/reqConnectSFCCPOptions/reqTaskIncludeAgentFriendlyName"] || 'false';
-
-      var queueName = callContext.callAgentUserName;
-      queueName += includeAgentFriendlyName === 'true' ? ' (' + callContext.callAgentFriendlyName + ')' : '';
-
-      return queueName;
+      clearCallContext();
     }
   }
 
-  function saveLogCallback(response) {
+  function updateTaskCallback(response) {
     if (response.success === false || response.result === null || response.returnValue === null) {
-      connect.getLog().error("ACSFIntegration:CallTask:createTask failed to save task").withObject(response.error);
+      connect.getLog().error("ACSFIntegration:CallTask:updateTask failed to update task").withObject(response.error);
       return;
     }
 
     var taskId  = response.result || response.returnValue.recordId;
 
-    connect.getLog().info("ACSFIntegration:CallTask:createTask task saved. Id=" + taskId);
+    connect.getLog().info("ACSFIntegration:CallTask:updateTask task updated. Id=" + taskId);
 
     var taskAction = _ccSettings["/reqConnectSFCCPOptions/reqTaskAction"] || 'none';
 
-    if (taskAction !== 'none') {
-      var taskPage = _ccSettings["/reqConnectSFCCPOptions/reqTaskPage"] || 'ACSFCCP_CallTask';
-
-      var taskURL = "/apex/" + taskPage + "?id=" + taskId + "&ani=" + getCurrentCallContext().callPhoneNumber;
-
-      if (sforce.console) {
-        // Classic Console
-        sforce.console.getFocusedPrimaryTabId(function (result) {
-          var primaryTabId = result.id;
-          if (primaryTabId !== "null") {
-            sforce.console.openSubtab(primaryTabId, taskURL, true, _tabLabel, null, openWorkingTab);
-          } else {
-            sforce.console.openPrimaryTab(null, taskURL, true, _tabLabel, openWorkingTab);
-          }
-        });
-      } else {
-        // Lightning Console
-        sforce.opencti && sforce.opencti.screenPop({
-          type: sforce.opencti.SCREENPOP_TYPE.URL,
-          params: {
-            url: taskURL
-          }
-        });
-      }
+    if (taskAction === 'end') {
+      popTask(getCurrentCallContext());
+      clearCallContext();
     }
   }
 
-  function openWorkingTab(result) {
+  function popTask(callContext) {
+    var taskPage = _ccSettings["/reqConnectSFCCPOptions/reqTaskPage"] || 'ACSFCCP_CallTask';
+
+    var taskURL = "/apex/" + taskPage + "?id=" + callContext.callTaskId + "&ani=" + callContext.callPhoneNumber;
+
+    if (sforce.console) {
+      // Classic Console
+      sforce.console.getFocusedPrimaryTabId(function (result) {
+        var primaryTabId = result.id;
+        if (primaryTabId !== "null") {
+          sforce.console.openSubtab(primaryTabId, taskURL, true, _tabLabel, null, popTaskCallback);
+        } else {
+          sforce.console.openPrimaryTab(null, taskURL, true, _tabLabel, popTaskCallback);
+        }
+      });
+    } else {
+      // Lightning Console
+      sforce.opencti && sforce.opencti.screenPop({
+        type: sforce.opencti.SCREENPOP_TYPE.URL,
+        params: {
+          url: taskURL
+        },
+        callback: popTaskCallback
+      });
+    }
+  }
+
+  function popTaskCallback(result) {
     connect.getLog().info("ACSFIntegration:CallTask:openWorkingTab invoked");
     if (result.success) {
       sforce.console && sforce.console.addEventListener(
-        sforce.console.ConsoleEvent.CLOSE_TAB,
-        onTabClose,
-        { tabId : result.id }
+          sforce.console.ConsoleEvent.CLOSE_TAB,
+          onTabClose,
+          { tabId : result.id }
       );
     }
     else {
@@ -245,6 +277,7 @@ limitations under the License.
     sessionStorage.removeItem("CCP-callPhoneNumber");
     sessionStorage.removeItem("CCP-callAgentUserName");
     sessionStorage.removeItem("CCP-callAgentFriendlyName");
+    sessionStorage.removeItem("CCP-callTaskId");
     sessionStorage.removeItem("CCP-whoId");
     sessionStorage.removeItem("CCP-whatId");
   }
@@ -256,11 +289,12 @@ limitations under the License.
       callType: sessionStorage.getItem("CCP-callType"),
       callStartTime: sessionStorage.getItem("CCP-callStartTime"),
       callEndTime: sessionStorage.getItem("CCP-callEndTime"),
-      callStartdate: sessionStorage.getItem("CCP-callStartDate"),
+      callStartDate: sessionStorage.getItem("CCP-callStartDate"),
       callStartDateTime: sessionStorage.getItem("CCP-callStartDateTime"),
       callPhoneNumber: sessionStorage.getItem("CCP-callPhoneNumber"),
       callAgentUserName: sessionStorage.getItem("CCP-callAgentUserName"),
       callAgentFriendlyName: sessionStorage.getItem("CCP-callAgentFriendlyName"),
+      callTaskId: sessionStorage.getItem("CCP-callTaskId"),
       whoId: sessionStorage.getItem("CCP-whoId"),
       whatId: sessionStorage.getItem("CCP-whatId")
     };
@@ -269,48 +303,85 @@ limitations under the License.
     return result;
   }
 
-  function getTaskString(callContact, callContext) {
-    taskString = "CallDurationInSeconds=" + getTaskDuration(callContact, callContext)  +
-      "&CallObject=" + callContact.getContactId() +
-      "&CallType=" + callContext.callType +
-      "&Type=" + "Call" +
-      "&IsClosed=" + true +
-      "&Status=" + "Completed" +
-      "&ActivityDate=" + callContext.callStartDate +
-      "&Subject=" + callContext.callType + " - "+ getQueueName(callContext) + " - "+ callContext.callPhoneNumber +
-      "&TaskSubtype=" + "Call" +
-      "&Phone=" + callContext.callPhoneNumber;
-      "&WhatId=" + callContext.whatId +
-      "&WhoId=" + callContext.whoId;
+  function getInitialTaskString(callContact, callContext) {
+    var queueName = getQueueName(callContext);
+
+    var taskString = "CallObject=" + callContact.getContactId() +
+        "&CallType=" + callContext.callType +
+        "&Type=" + "Call" +
+        "&IsClosed=" + true +
+        "&Status=" + "Completed" +
+        "&ActivityDate=" + callContext.callStartDate +
+        "&Subject=" + callContext.callType + " - " + queueName + " - "+ callContext.callPhoneNumber +
+        "&TaskSubtype=" + "Call" +
+        "&Phone=" + callContext.callPhoneNumber;
+
+    taskString = encodeURI(taskString);
 
     return taskString;
   }
 
-  function getTaskObject(callContact, callContext) {
-    var callDuration = 0;
-    var taskObject = {};
+  function getInitialTaskObject(callContact, callContext) {
+    var queueName = getQueueName(callContext);
 
-    taskObject = {
+    var taskObject = {
       entityApiName: "Task",
-      CallDurationInSeconds: getTaskDuration(callContact, callContext),
       CallObject: callContact.getContactId(),
       CallType: callContext.callType,
       Type: "Call",
       IsClosed: true,
       Status: "Completed",
       ActivityDate: callContext.callStartDate,
-      Subject: callContext.callType + " - " + getQueueName(callContext) + " - " + callContext.callPhoneNumber,
+      Subject: callContext.callType + " - " + queueName + " - " + callContext.callPhoneNumber,
       TaskSubtype: "Call",
-      Phone: callContext.callPhoneNumber,
-      WhatId: callContext.whatId,
-      WhoId: callContext.whoId
-    }
+      Phone: callContext.callPhoneNumber
+    };
 
     return taskObject;
   }
 
+  function getUpdateTaskString(callContact, callContext) {
+    var taskDuration = getTaskDuration(callContact, callContext);
+
+    var taskString = "Id=" + callContext.callTaskId +
+        "&CallDurationInSeconds=" + taskDuration  +
+        "&WhatId=" + callContext.whatId +
+        "&WhoId=" + callContext.whoId;
+
+    taskString = encodeURI(taskString);
+
+    return taskString;
+  }
+
+  function getUpdateTaskObject(callContact, callContext) {
+    var taskDuration = getTaskDuration(callContact, callContext);
+
+    var taskObject = {
+      Id: callContext.callTaskId,
+      CallDurationInSeconds: taskDuration,
+      WhatId: callContext.whatId,
+      WhoId: callContext.whoId
+    };
+
+    return taskObject;
+  }
+
+  function getQueueName(callContext) {
+    if (callContext.callQueue && callContext.callQueue !== '') {
+      return callContext.callQueue;
+    }
+    else {
+      var includeAgentFriendlyName = _ccSettings["/reqConnectSFCCPOptions/reqTaskIncludeAgentFriendlyName"] || 'false';
+
+      var queueName = callContext.callAgentUserName;
+      queueName += includeAgentFriendlyName === 'true' ? ' (' + callContext.callAgentFriendlyName + ')' : '';
+
+      return queueName;
+    }
+  }
+
   function getTaskDuration(callContact, callContext) {
-    if (callContact.callEndTime) {
+    if (callContext.callEndTime) {
       return Math.floor((callContext.callEndTime - callContext.callStartTime) / 1000);
     }
 

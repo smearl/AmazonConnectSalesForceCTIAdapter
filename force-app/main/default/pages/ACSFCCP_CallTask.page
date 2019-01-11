@@ -16,6 +16,7 @@ limitations under the License.
 
 <apex:page id="ACSFCCP_CallTask" lightningStylesheets="true" standardcontroller="Task" extensions="ACSFCCP_CallTaskController">
     <apex:includeScript value="/support/console/44.0/integration.js"/>
+
     <apex:slds />
 
     <style>
@@ -29,26 +30,18 @@ limitations under the License.
     </style>
 
     <script>
-        function closeTaskTab() {
-            if (sforce.console && sforce.console.isInConsole()) {
-                sforce.console.getEnclosingPrimaryTabId(function(r1) {
-                    var primaryTabId = r1.id;
-
-                    sforce.console.getEnclosingTabId(function(r2) {
-                        sforce.console.closeTab(r2.id);
-                        sforce.console.refreshPrimaryTabById(primaryTabId, true, function(r3) {
-                            alert(r3);
-                        }),
-                            true;
-                    });
-                });
-            } else {
-                document.getElementById('onSaveCompleted').classList.remove('hidden');
-                setTimeout(function () {
-                    document.getElementById('onSaveCompleted').classList.add('hidden');
-                }, 3000);
-            }
+      function closeTaskTab() {
+        if (sforce.console && sforce.console.isInConsole()) {
+          sforce.console.getEnclosingPrimaryTabId(function(result) {
+            sforce.console.closeTab(result.id);
+          });
+        } else {
+          document.getElementById('onSaveCompleted').classList.remove('hidden');
+          setTimeout(function () {
+            document.getElementById('onSaveCompleted').classList.add('hidden');
+          }, 3000);
         }
+      }
     </script>
 
     <div class="slds-scope">

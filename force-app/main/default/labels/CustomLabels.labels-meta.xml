@@ -57,11 +57,11 @@
         <value>Phone Number</value>
     </labels>
     <labels>
-        <fullName>ACSFCCP_PostCallTaskTabName</fullName>
+        <fullName>ACSFCCP_CallActivityTabName</fullName>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>ACSFCCP_PostCallTaskTabName</shortDescription>
-        <value>Call Wrap-up</value>
+        <shortDescription>ACSFCCP_CallActivityTabName</shortDescription>
+        <value>Call Activity</value>
     </labels>
     <labels>
         <fullName>ACSFCCP_Seconds_in_Call_View</fullName>

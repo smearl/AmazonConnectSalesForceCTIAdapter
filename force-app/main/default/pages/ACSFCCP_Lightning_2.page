@@ -199,7 +199,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
             var loadACSFIntegration = function () {
                 ctx.ACSFIntegration.CallAttributesDisplay.onAgentHandler();
                 ctx.ACSFIntegration.CallInformation.onAgentHandler("{!namespaceClassPrefix}");
-                ctx.ACSFIntegration.CallTask.onAgentHandler("{!namespacePagePrefix}", "{!$Label.ACSFCCP_PostCallTaskTabName}", ccSettings);
+                ctx.ACSFIntegration.CallTask.onAgentHandler("{!namespacePagePrefix}", "{!$Label.ACSFCCP_CallActivityTabName}", ccSettings);
             }
 
             var showLoginScreen = function () {

@@ -224,7 +224,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
             var loadACSFIntegration = function () {
                 ctx.ACSFIntegration.OmniPresenceSync.onAgentHandler("{!namespacePagePrefix}");
-                ctx.ACSFIntegration.CallTask.onAgentHandler("{!namespacePagePrefix}", "{!$Label.ACSFCCP_PostCallTaskTabName}", ccSettings);
+                ctx.ACSFIntegration.CallTask.onAgentHandler("{!namespacePagePrefix}", "{!$Label.ACSFCCP_CallActivityTabName}", ccSettings);
                 ctx.ACSFIntegration.CallAttributesDisplay.onAgentHandler();
                 ctx.ACSFIntegration.AutoCallCampaign.onAgentHandler(ccSettings);
                 ctx.ACSFIntegration.CallInformation.onAgentHandler("{!namespaceClassPrefix}");

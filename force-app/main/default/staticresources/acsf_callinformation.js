@@ -148,7 +148,6 @@ limitations under the License.
                     } else {
                       sessionStorage.removeItem("CCP-whatId");
                     }
-
                   }
                 }
             );
