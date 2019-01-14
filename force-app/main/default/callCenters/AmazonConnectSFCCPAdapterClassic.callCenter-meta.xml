@@ -43,7 +43,7 @@
         <items>
             <label>Amazon Connect CCP URL</label>
             <name>reqConnectURL</name>
-            <value>https://wfamzsfdc.awsapps.com/connect/ccp</value>
+            <value>https://yourinstancename.awsapps.com/connect/ccp</value>
         </items>
         <items>
             <label>Amazon Connect CCP SSO URL</label>
@@ -119,6 +119,26 @@
             <label>Phone Number Formatting</label>
             <name>reqConnectPhoneFormat</name>
             <value>{&quot;OPF&quot;:&quot;0&quot;,&quot;NPF&quot;:&quot;1&quot;,&quot;Country&quot;:&quot;US&quot;,&quot;NF&quot;:&quot;International_plaintext&quot;,&quot;TNF&quot;:&quot;(555) 123-4567&quot;}</value>
+        </items>
+        <items>
+            <label>Call Activity Auto Create</label>
+            <name>reqTaskAutoCreate</name>
+            <value>true</value>
+        </items>
+        <items>
+            <label>Call Activity Action</label>
+            <name>reqTaskAction</name>
+            <value>end</value>
+        </items>
+        <items>
+            <label>Call Activity Custom Page</label>
+            <name>reqTaskPage</name>
+            <value></value>
+        </items>
+        <items>
+            <label>Call Activity Include Agent Friendy Name</label>
+            <name>reqTaskIncludeAgentFriendlyName</name>
+            <value>true</value>
         </items>
         <label>Amazon Connect Information</label>
         <name>reqConnectSFCCPOptions</name>

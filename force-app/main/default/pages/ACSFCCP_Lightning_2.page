@@ -63,7 +63,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
     <apex:includeScript value="{!$Resource.acsf_callattributesdisplay}" />
     <apex:includeScript value="{!$Resource.acsf_callinformation}" />
     <apex:includeScript value="{!$Resource.acsf_screenpopmanager}" />
-    <apex:includeScript value="{!$Resource.acsf_postcalltask}" />
+    <apex:includeScript value="{!$Resource.acsf_calltask}" />
 
     <style>
         body {
@@ -89,7 +89,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
             border: none;
         }
 
-        #callAttributesBadge: {
+        #callAttributesBadge {
             top: 195px;
             left: 5px;
             position: absolute;
@@ -199,7 +199,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
             var loadACSFIntegration = function () {
                 ctx.ACSFIntegration.CallAttributesDisplay.onAgentHandler();
                 ctx.ACSFIntegration.CallInformation.onAgentHandler("{!namespaceClassPrefix}");
-                ctx.ACSFIntegration.PostCallTask.onAgentHandler("{!namespacePagePrefix}", "{!$Label.ACSFCCP_PostCallTaskTabName}", ccSettings);
+                ctx.ACSFIntegration.CallTask.onAgentHandler("{!namespacePagePrefix}", "{!$Label.ACSFCCP_CallActivityTabName}", ccSettings);
             }
 
             var showLoginScreen = function () {
@@ -435,7 +435,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
 
             var cbCCSettings = function (response) {
                 if (response.success) {
-                    connect.getLog().info("ConnectSFCCP:cbCCSettings:OK:" + response.success);
+                    connect.getLog().info("ConnectSFCCP:cbCCSettings:OK");
                     ccSettings = response.returnValue;
                     cbInConsole(response);
                 }

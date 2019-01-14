@@ -14,10 +14,10 @@ limitations under the License.
 */
 
 @isTest
-private class ACSFCCP_PostCallUpdateTaskCtrlTest {
+private class ACSFCCP_CallTaskControllerTest {
 
-  @isTest static void testExpectAtLeastOneActiveDispositionCode() {
-    //System.assert(new ACSFCCP_PostCallUpdateTaskLookupsController(null).getDispositionCodes().size() > 0, 'There should be at least one ACTIVE disposition code configured in the Custom Metadata Types');
-    System.assert(new ACSFCCP_PostCallUpdateTaskController(null).getDispositionCodes().size() >= 0, 'DMD');
+  @isTest
+  static void testExpectAtLeastOneActiveDispositionCode() {
+    System.assert(new ACSFCCP_CallTaskController(null).getDispositionCodes().size() >= 0, 'DMD');
   }
 }

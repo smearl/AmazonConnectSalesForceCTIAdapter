@@ -91,14 +91,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     </apex:remoteObjectModel>
     </apex:remoteObjects>
  -->
-    <apex:includeScript value="/support/api/40.0/interaction.js" />
-    <!-- <apex:includeScript value="//cticm.chrysalis.net/scripts/interaction.js"/> -->
-    <apex:includeScript value="/support/console/40.0/integration.js" />
+    <apex:includeScript value="/support/api/44.0/interaction.js" />
+    <apex:includeScript value="/support/console/44.0/integration.js" />
     <apex:includeScript value="{!$Resource.amazonconnectstreams}" />
     <apex:includeScript value="{!$Resource.libphonenumberjs_2}" />
     <apex:includeScript value="{!$Resource.acsf_callattributesdisplay}" />
     <apex:includeScript value="{!$Resource.acsf_omnipresencesync}" />
-    <apex:includeScript value="{!$Resource.acsf_postcalltask}" />
+    <apex:includeScript value="{!$Resource.acsf_calltask}" />
     <apex:includeScript value="{!$Resource.acsf_autocallcampaign}" />
     <apex:includeScript value="{!$Resource.acsf_callinformation}" />
     <apex:includeScript value="{!$Resource.acsf_screenpopmanager}" />
@@ -127,7 +126,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             border: none;
         }
 
-        #callAttributesBadge: {
+        #callAttributesBadge {
             top: 195px;
             left: 5px;
             position: absolute;
@@ -225,7 +224,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
             var loadACSFIntegration = function () {
                 ctx.ACSFIntegration.OmniPresenceSync.onAgentHandler("{!namespacePagePrefix}");
-                ctx.ACSFIntegration.PostCallTask.onAgentHandler("{!namespacePagePrefix}", "{!$Label.ACSFCCP_PostCallTaskTabName}", ccSettings);
+                ctx.ACSFIntegration.CallTask.onAgentHandler("{!namespacePagePrefix}", "{!$Label.ACSFCCP_CallActivityTabName}", ccSettings);
                 ctx.ACSFIntegration.CallAttributesDisplay.onAgentHandler();
                 ctx.ACSFIntegration.AutoCallCampaign.onAgentHandler(ccSettings);
                 ctx.ACSFIntegration.CallInformation.onAgentHandler("{!namespaceClassPrefix}");
@@ -457,7 +456,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 
             var cbCCSettings = function (response) {
                 if (response.result) {
-                    connect.getLog().info("ConnectSFCCP:cbCCSettings:OK:" + response.result);
+                    connect.getLog().info("ConnectSFCCP:cbCCSettings:OK");
                     ccSettings = JSON.parse(response.result);
                     sforce.interaction.isInConsole(cbInConsole);
                 }

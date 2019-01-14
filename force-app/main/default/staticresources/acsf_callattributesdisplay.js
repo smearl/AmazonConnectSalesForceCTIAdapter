@@ -18,7 +18,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     ctx.ACSFIntegration = {};
   }
 
-  const _MAX_WIDTH_CONSOLE = 110;
+  var _MAX_WIDTH_CONSOLE = 110;
 
   var _callAttributeConfigurationPromise;
 
@@ -127,7 +127,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
   }
 
   ctx.ACSFIntegration.CallAttributesDisplay = {
-    onAgentHandler: function (agent) {
+    onAgentHandler: function () {
       connect.getLog().info("ACSFIntegration:CallAttributesDisplay:onAgentHandler");
       document.getElementById('callAttributesBadge').onclick = function () {
         handleBadgeClicked();

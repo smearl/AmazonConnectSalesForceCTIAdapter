@@ -124,6 +124,36 @@ limitations under the License.
           showTransferBtnOnRefreshApplicable(agent, contact);
         }
       });
+
+      sforce.opencti.onNavigationChange({ listener: function(response) {
+        if (response && response.objectType) {
+          var objectType = response.objectType;
+
+          if (objectType === 'User' || objectType === 'Contact' || objectType === 'Lead' || objectType === 'Account') {
+            Visualforce.remoting.Manager.invokeAction(
+                _namespacePrefix + 'ACSFCCP_CallInformationController.getTaskDetails',
+                response.recordId,
+                function (result, event) {
+                  if (event.status && result) {
+                    console.log("********** TaskDetails: " + JSON.stringify(result));
+
+                    if (result.whoId) {
+                      sessionStorage.setItem("CCP-whoId", result.whoId);
+                    } else {
+                      sessionStorage.removeItem("CCP-whoId");
+                    }
+
+                    if (result.whatId) {
+                      sessionStorage.setItem("CCP-whatId", result.whatId);
+                    } else {
+                      sessionStorage.removeItem("CCP-whatId");
+                    }
+                  }
+                }
+            );
+          }
+        }
+      }});
     },
 
     onAccepted: function(contact) {
