@@ -192,6 +192,8 @@ limitations under the License.
 
     if (taskAction === 'end') {
       popTask(getCurrentCallContext());
+    }
+    else {
       clearCallContext();
     }
   }
@@ -235,6 +237,8 @@ limitations under the License.
     else {
       connect.getLog().error("ACSFIntegration:CallTask:openWorkingTab unable to open tab");
     }
+
+    clearCallContext();
   }
 
   function onTabClose(result) {
