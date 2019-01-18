@@ -14,46 +14,7 @@ limitations under the License.
 */
 
 global with sharing class ACSFCCP_CallInformationController {
-  public static final String CACHE_PARTITION_PREFIX = 'ACSFCCP';
-  public static final String CACHE_TEST_KEY = 'TESTKEY';
-  public static final String CACHE_TEST_VALUE = 'TEST-VALUE';
-
   public ACSFCCP_CallInformationController(ACSFCCP_NamespaceController controller) { }
-
-  @RemoteAction
-  global static Boolean isPlatformCacheAvailable() {
-    try {
-      Cache.Org.put(CACHE_PARTITION_PREFIX + CACHE_TEST_KEY, CACHE_TEST_VALUE, 301);
-      String cacheVal = (String) Cache.Org.get(CACHE_PARTITION_PREFIX + CACHE_TEST_KEY);
-      return cacheVal == CACHE_TEST_VALUE;
-    }
-    catch (Exception e) {
-      return false;
-    }
-  }
-
-  @RemoteAction
-  global static String storeCallInformation(string properties) {
-    Map<String, String> callInformation = (Map<String, String>) JSON.deserialize(properties, Map<String, String>.class);
-    String cid = callInformation.get('contactId').replace('-', '');
-    Cache.Org.put(CACHE_PARTITION_PREFIX + cid, properties, 7200);
-    return cid;
-  }
-
-  @RemoteAction
-  global static Map<String, String> returnCallInformation(string contactId) {
-    Map<String, String> callInformation = new Map<String, String>();
-
-    if (!String.isBlank(contactId)) {
-      String cid = contactId.replace('-', '');
-      String information = (String) Cache.Org.get(CACHE_PARTITION_PREFIX + cid);
-      if (information != null) {
-        callInformation = (Map<String, String>) JSON.deserialize(information, Map<String, String>.class);
-      }
-    }
-
-    return callInformation;
-  }
 
   @RemoteAction
   public static TaskDetails getTaskDetails(Id id) {

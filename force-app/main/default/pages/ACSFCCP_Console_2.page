@@ -86,11 +86,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             <apex:remoteObjectField name="Case__c" jsShorthand="Case" />
         </apex:remoteObjectModel>
     </apex:remoteObjects>
-    <!--
-    <apex:remoteObjectField name="Case__c" jsShorthand="Case" />
-    </apex:remoteObjectModel>
-    </apex:remoteObjects>
- -->
+
     <apex:includeScript value="/support/api/44.0/interaction.js" />
     <apex:includeScript value="/support/console/44.0/integration.js" />
     <apex:includeScript value="{!$Resource.amazonconnectstreams}" />
@@ -98,9 +94,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     <apex:includeScript value="{!$Resource.acsf_callattributesdisplay}" />
     <apex:includeScript value="{!$Resource.acsf_omnipresencesync}" />
     <apex:includeScript value="{!$Resource.acsf_calltask}" />
-    <apex:includeScript value="{!$Resource.acsf_autocallcampaign}" />
     <apex:includeScript value="{!$Resource.acsf_callinformation}" />
     <apex:includeScript value="{!$Resource.acsf_screenpopmanager}" />
+    <apex:includeScript value="{!$Resource.acsf_autocallcampaign}" />
 
     <style>
         body {
@@ -191,14 +187,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                         </div>
                     </section>
                 </div>
-                <div id="transferBtn" class="hidden" style="position:absolute; top:240px; right:10px;">
-                    <button class="slds-button slds-button_icon slds-button_icon-container slds-button_icon-border-filled" title="{!$Label.ACSFCCP_Store_Call_Information}">
-                        <!-- <svg class="slds-button__icon" aria-hidden="true">
-                            <use xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/standard-sprite/svg/symbols.svg#record')}" />
-                        </svg>-->
-                        <span class="slds-assistive-text">{!$Label.ACSFCCP_Store_Call_Information}</span>
-                    </button>
-                </div>
             </div>
             <div id="connectcontainer"></div>
         </div>
@@ -223,11 +211,11 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             var connectAutoLogin = 0;
 
             var loadACSFIntegration = function () {
-                ctx.ACSFIntegration.OmniPresenceSync.onAgentHandler("{!namespacePagePrefix}");
-                ctx.ACSFIntegration.CallTask.onAgentHandler("{!namespacePagePrefix}", "{!$Label.ACSFCCP_CallActivityTabName}", ccSettings);
-                ctx.ACSFIntegration.CallAttributesDisplay.onAgentHandler();
-                ctx.ACSFIntegration.AutoCallCampaign.onAgentHandler(ccSettings);
-                ctx.ACSFIntegration.CallInformation.onAgentHandler("{!namespaceClassPrefix}");
+              ctx.ACSFIntegration.CallAttributesDisplay.onAgentHandler();
+              ctx.ACSFIntegration.CallInformation.onAgentHandler("{!namespaceClassPrefix}");
+              ctx.ACSFIntegration.CallTask.onAgentHandler("{!namespacePagePrefix}", "{!$Label.ACSFCCP_CallActivityTabName}", ccSettings);
+              ctx.ACSFIntegration.OmniPresenceSync.onAgentHandler("{!namespacePagePrefix}");
+              ctx.ACSFIntegration.AutoCallCampaign.onAgentHandler(ccSettings);
             }
 
             var showLoginScreen = function () {
@@ -243,12 +231,6 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
             var setupLoginHandler = function (ccpUrl) {
                 connect.getLog().info("ConnectSFCCP:setupLoginHandler invoked");
 
-                //begin change to support SSO
-                /*
-                document.getElementById('loginButton').addEventListener('click', function () {
-                loginWindow = window.open(ccpUrl, 'AmazonConnectLoginWindow', 'width=400, height=520');
-                });
-                 */
                 document.getElementById('loginButton').addEventListener('click', function () {
                     if (connectLoginPopup) {
                         loginWindow = window.open(ccpUrl, 'AmazonConnectLoginWindow', 'width=400, height=520');
@@ -280,7 +262,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 if (response.result) {
                     connect.getLog().info("ConnectSFCCP:cbHeightSet:OK");
                 } else {
-                    connect.getLog().error("ConnectSFCCP:cbHeightSet:Error:" + response.error);
+                    connect.getLog().error("ConnectSFCCP:cbHeightSet:Error: %s", response.error);
                 }
             }
 
@@ -288,7 +270,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 if (response.result) {
                     connect.getLog().info("ConnectSFCCP:cbWidthSet:OK");
                 } else {
-                    connect.getLog().error("ConnectSFCCP:cbWidthSet:Error:" + response.error);
+                    connect.getLog().error("ConnectSFCCP:cbWidthSet:Error: %s", response.error);
                 }
             }
 
@@ -296,13 +278,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 if (response.result) {
                     connect.getLog().info("ConnectSFCCP:ccbClickToDial:OK");
                 } else {
-                    connect.getLog().error("ConnectSFCCP:ccbClickToDial:Error:" + response.error);
+                    connect.getLog().error("ConnectSFCCP:ccbClickToDial:Error: %s", response.error);
                 }
             };
 
             var cbInConsole = function (response) {
                 var isInConsole = response.result;
-                connect.getLog().info("ConnectSFCCP:cbInConsole:" + ccSettings["/reqConnectSFCCPOptions/reqConnectURL"]);
+                connect.getLog().info("ConnectSFCCP:cbInConsole: %s", ccSettings["/reqConnectSFCCPOptions/reqConnectURL"]);
                 connectURL = ccSettings["/reqConnectSFCCPOptions/reqConnectURL"];
 
                 //begin additions for SSO
@@ -324,13 +306,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 connectCH = (isInConsole ? ccSettings["/reqConnectSFCCPOptions/reqConnectCH"] : ccSettings["/reqConnectSFCCPOptions/reqConnectCLCH"]) + "px";
                 //end additions for SSO
                 connectPhoneFormat = JSON.parse(ccSettings["/reqConnectSFCCPOptions/reqConnectPhoneFormat"]);
-                connect.getLog().info("ConnectSFCCP:cbInConsole:JSContainer:Prefix:" + connectPhoneFormat.OPF + "|" + connectPhoneFormat.NPF + "|"
+                connect.getLog().info("ConnectSFCCP:cbInConsole:JSContainer:Prefix: %s", connectPhoneFormat.OPF + "|" + connectPhoneFormat.NPF + "|"
                     + connectPhoneFormat.Country + "|" + connectPhoneFormat.NF + "|" + connectPhoneFormat.TNF);
 
                 var testnum = libphonenumber.format(connectPhoneFormat.TNF, connectPhoneFormat.Country, connectPhoneFormat.NF);
-                connect.getLog().info("ConnectSFCCP:cbInConsoleJSContainer:TestNumber:e164Number:" + testnum);
+                connect.getLog().info("ConnectSFCCP:cbInConsoleJSContainer:TestNumber:e164Number: %s", testnum);
                 var testnum2 = testnum.replace(/([^0-9])+/g, '');
-                connect.getLog().info("ConnectSFCCP:cbInConsole:JSContainer:TestNumber:e164Numberstripped:" + testnum2);
+                connect.getLog().info("ConnectSFCCP:cbInConsole:JSContainer:TestNumber:e164Numberstripped: %s", testnum2);
 
                 connect.getLog().info("ConnectSFCCP:cbInConsole:JSContainer");
                 var container = document.getElementById("connectcontainer");
@@ -361,7 +343,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                             ctx.ACSFIntegration.CallAttributesDisplay.onConnecting(contact);
                         });
                     } catch (e) {
-                        connect.getLog().error("ConnectSFCCP:onConnecting:Error:").withException(e);
+                        connect.getLog().error("ConnectSFCCP:onConnecting:Error: ").withException(e);
                     }
 
                     //MD-added contact.onIncoming()
@@ -372,7 +354,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                             ctx.ACSFIntegration.CallAttributesDisplay.onConnecting(contact);
                         });
                     } catch (e) {
-                        connect.getLog().error("ConnectSFCCP:onIncoming:Error:").withException(e);
+                        connect.getLog().error("ConnectSFCCP:onIncoming:Error: ").withException(e);
                     }
 
                     try {
@@ -381,7 +363,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                             ctx.ACSFIntegration.CallAttributesDisplay.onAccepted(contact);
                         });
                     } catch (e) {
-                        connect.getLog().error("ConnectSFCCP:onAccepted:Error:").withException(e);
+                        connect.getLog().error("ConnectSFCCP:onAccepted:Error: ").withException(e);
                     }
 
                     try {
@@ -390,7 +372,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                             ctx.ACSFIntegration.CallAttributesDisplay.onEnded(contact);
                         });
                     } catch (e) {
-                        connect.getLog().error("ConnectSFCCP:onEnd:Error:").withException(e);
+                        connect.getLog().error("ConnectSFCCP:onEnd:Error: ").withException(e);
                     }
                 });
 
@@ -400,27 +382,27 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                         var onClickListener = function (response) {
                             try {
                                 if (response.result) {
-                                    connect.getLog().info("ConnectSFCCP:cbInConsole:onClickListener:OK:" + response.result);
+                                    connect.getLog().info("ConnectSFCCP:cbInConsole:onClickListener:OK: %s", response.result);
                                     var phoneContact = JSON.parse(response.result);
                                     var phoneParsed = libphonenumber.parse(phoneContact.number.toString(), { country: { default: connectPhoneFormat.Country } });
-                                    connect.getLog().info("ConnectSFCCP:cbInConsole:onClickListener:OK:Parsed:" + phoneParsed.country + "|" + phoneParsed.phone);
+                                    connect.getLog().info("ConnectSFCCP:cbInConsole:onClickListener:OK:Parsed: %s", phoneParsed.country + "|" + phoneParsed.phone);
                                     var e164PhoneNumber = libphonenumber.format(phoneParsed.phone, phoneParsed.country, connectPhoneFormat.NF);
-                                    connect.getLog().info("ConnectSFCCP:cbInConsole:onClickListener:OK:h164Number:" + e164PhoneNumber);
+                                    connect.getLog().info("ConnectSFCCP:cbInConsole:onClickListener:OK:h164Number: %s", e164PhoneNumber);
                                     agent.connect(connect.Address.byPhoneNumber(e164PhoneNumber), {});
                                     connect.getLog().info("ConnectSFCCP:cbInConsole:Classic:onClickListener:OK:AgentConnect");
                                     sforce.interaction.setVisible(true);
                                     connect.getLog().info("ConnectSFCCP:cbInConsole:Classic:onClickListener:OK:setVisible");
-                                    connect.getLog().info("ConnectSFCCP:cbInConsole:Classic:onClickListener:OK:GP:" + agent.getPermissions());
+                                    connect.getLog().info("ConnectSFCCP:cbInConsole:Classic:onClickListener:OK:GP: %s", agent.getPermissions());
                                 }
                             } catch (e) {
-                                connect.getLog().error("ConnectSFCCP:cbInConsole:onClickListener:Error:").withException(e);
+                                connect.getLog().error("ConnectSFCCP:cbInConsole:onClickListener:Error: ").withException(e);
                             }
                         }
                         sforce.interaction.cti.onClickToDial(onClickListener);
 
                         onSoftphoneLoginSuccessful();
                     } catch (e) {
-                        connect.getLog().error("ConnectSFCCP:cbInConsole:Agent:Error:").withException(e);
+                        connect.getLog().error("ConnectSFCCP:cbInConsole:Agent:Error: ").withException(e);
                     }
                 });
 
@@ -428,7 +410,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 connect.agent(function (agent) {
                     try {
                         var aPermissions = agent.getPermissions();
-                        connect.getLog().info("ConnectSFCCP:GP:" + aPermissions);
+                        connect.getLog().info("ConnectSFCCP:GP: %s", aPermissions);
                         if (aPermissions == "outboundCall") {
                             sforce.interaction.cti.enableClickToDial(cbClickToDial);
                         }
@@ -443,7 +425,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 sforce.interaction.cti.setSoftphoneHeight(connectCH, cbHeightSet);
 
                 //auto-login
-                connect.getLog().info("ConnectSFCCP:cbInConsole:connectAutoLogin=" + connectAutoLogin);
+                connect.getLog().info("ConnectSFCCP:cbInConsole:connectAutoLogin=%s", connectAutoLogin);
                 if (connectAutoLogin >= 1000) {
                     setTimeout(function () {
                         if (connectAutoLogin >= 1000) document.getElementById('loginButton').click();
@@ -461,7 +443,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                     sforce.interaction.isInConsole(cbInConsole);
                 }
                 else {
-                    connect.getLog().error("ConnectSFCCP:cbCCSettings:Error:" + response.error);
+                    connect.getLog().error("ConnectSFCCP:cbCCSettings:Error: %s", response.error);
                 }
             };
 
@@ -470,10 +452,9 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
                 sforce.interaction.cti.getCallCenterSettings(cbCCSettings);
                 sforce.interaction.cti.disableClickToDial();
             } catch (e) {
-                connect.getLog().error("ConnectSFCCP:Initialization:getCCSettings :Error:").withException(e);
+                connect.getLog().error("ConnectSFCCP:Initialization:getCCSettings :Error: ").withException(e);
             }
         })(this);
-
     </script>
 
     </html>

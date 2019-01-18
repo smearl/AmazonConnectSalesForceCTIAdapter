@@ -24,7 +24,7 @@ limitations under the License.
             width: 150px;
             margin-right: 5px;
         }
-        .hidden: {
+        .hidden {
             display: none;
         }
     </style>
