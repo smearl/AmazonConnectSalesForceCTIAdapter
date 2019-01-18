@@ -29,33 +29,6 @@ private class ACSFCCP_CallInformationControllerTest {
     insert l;
   }
 
-
-  @isTest
-  static void testStoreAndCallInfo() {
-    if (ACSFCCP_CallInformationController.isPlatformCacheAvailable()) {
-      String info = '{"contactId" : "testContact", "data" : "123"}';
-      ACSFCCP_CallInformationController.storeCallInformation(info);
-      Map<String, String> result = ACSFCCP_CallInformationController.returnCallInformation('testContact');
-
-      if (result == null || result.get('data') == null) {
-        // Platform cache is configured but no space is allocated.
-        System.assert(true);
-      } else {
-        System.assertEquals('123', result.get('data'));
-      }
-    }
-  }
-
-  @isTest
-  static void testStoreCallInformation() {
-    if (ACSFCCP_CallInformationController.isPlatformCacheAvailable()) {
-      String info = '{"contactId" : "123123-1231-1123123", "data" : "123"}';
-      String result = ACSFCCP_CallInformationController.storeCallInformation(info);
-      System.assertEquals('12312312311123123', result);
-
-    }
-  }
-
   @isTest
   static void getTaskDetails() {
     Task t  = new Task();

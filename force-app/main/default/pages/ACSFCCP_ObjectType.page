@@ -36,7 +36,9 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
 <apex:page id="ACSFCCP_ObjectType" lightningStylesheets="true" controller="ACSFCCP_ObjectTypeController" title="Create New Lead or Contact">
+    <apex:includeScript value="/support/api/44.0/interaction.js"/>
     <apex:includeScript value="/support/console/44.0/integration.js"/>
+
     <apex:slds />
 
     <div class="slds-scope">
@@ -71,11 +73,9 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
 
         function openTab(url) {
             sforce.console.getEnclosingTabId(function(r1) {
-                var tabId = r1.id;
-
-                sforce.console.openPrimaryTab(null, url, true, null, function(r2) { });
-
-                sforce.console.closeTab(tabId);
+                sforce.console.openPrimaryTab(null, url, true, null, function(r2) {
+                  sforce.console.closeTab(r1.id);
+                });
             });
         }
     </script>
