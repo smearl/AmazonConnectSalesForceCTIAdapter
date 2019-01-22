@@ -17,7 +17,25 @@ global with sharing class ACSFCCP_CallInformationController {
   public ACSFCCP_CallInformationController(ACSFCCP_NamespaceController controller) { }
 
   @RemoteAction
-  public static TaskDetails getTaskDetails(Id id) {
+  global static Boolean isPlatformCacheAvailable() {
+    return true;
+  }
+
+  @RemoteAction
+  global static String storeCallInformation(string properties) {
+    return '';
+  }
+
+  @RemoteAction
+  global static Map<String, String> returnCallInformation(string contactId) {
+    Map<String, String> callInformation = new Map<String, String>();
+
+    return callInformation;
+  }
+
+
+  @RemoteAction
+  global static TaskDetails getTaskDetails(Id id) {
     TaskDetails td = new TaskDetails();
 
     if (id != null) {
@@ -51,7 +69,7 @@ global with sharing class ACSFCCP_CallInformationController {
     return td;
   }
 
-  public class TaskDetails {
+  global class TaskDetails {
     public Id whoId {get;set;}
     public Id whatId {get;set;}
 
@@ -60,7 +78,7 @@ global with sharing class ACSFCCP_CallInformationController {
   }
 
   @RemoteAction
-  public static List<ServicePresenceStatusHolder> getServicePresenceStatuses() {
+  global static List<ServicePresenceStatusHolder> getServicePresenceStatuses() {
     List<ServicePresenceStatusHolder> statuses = new List<ServicePresenceStatusHolder>();
 
     try {
@@ -83,7 +101,7 @@ global with sharing class ACSFCCP_CallInformationController {
     return statuses;
   }
 
-  public class ServicePresenceStatusHolder {
+  global class ServicePresenceStatusHolder {
     public String id {get; set;}
     public String developerName {get; set;}
     public String masterLabel {get; set;}

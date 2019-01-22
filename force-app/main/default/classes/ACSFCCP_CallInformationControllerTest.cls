@@ -16,72 +16,83 @@ limitations under the License.
 @isTest
 private class ACSFCCP_CallInformationControllerTest {
 
-  @TestSetup
-  static void setup()
-  {
-    Account a = new Account(Name='Test Acct 1', Phone='888-555-1212');
-    insert a;
+    @TestSetup
+    static void setup()
+    {
+        Account a = new Account(Name='Test Acct 1', Phone='888-555-1212');
+        insert a;
 
-    Contact c = new Contact(LastName='Test', FirstName='Contact', Phone='888-555-1313', AccountId = a.Id);
-    insert c;
+        Contact c = new Contact(LastName='Test', FirstName='Contact', Phone='888-555-1313', AccountId = a.Id);
+        insert c;
 
-    Lead l = new Lead(LastName='Test', FirstName='Lead', Phone='888-555-1414', Company='Test Company');
-    insert l;
-  }
+        Lead l = new Lead(LastName='Test', FirstName='Lead', Phone='888-555-1414', Company='Test Company');
+        insert l;
+    }
 
-  @isTest
-  static void getTaskDetails() {
-    Task t  = new Task();
+    @isTest
+    static void testStoreAndCallInfo() {
+        if (ACSFCCP_CallInformationController.isPlatformCacheAvailable()) {
+            String info = '{"contactId" : "testContact", "data" : "123"}';
+            ACSFCCP_CallInformationController.storeCallInformation(info);
+            Map<String, String> result = ACSFCCP_CallInformationController.returnCallInformation('testContact');
 
-    ACSFCCP_CallInformationController.TaskDetails td = ACSFCCP_CallInformationController.getTaskDetails(t.Id);
+            System.assert(result != null);
+        }
+    }
 
-    System.assert(td != null);
+    @isTest
+    static void getTaskDetails() {
+        Task t  = new Task();
 
-    System.assert(String.isEmpty(td.whoId));
+        ACSFCCP_CallInformationController.TaskDetails td = ACSFCCP_CallInformationController.getTaskDetails(t.Id);
 
-    System.assert(String.isEmpty(td.whatId));
-  }
+        System.assert(td != null);
 
-  @isTest
-  static void getTaskDetailsForAccount() {
-    Account a = [SELECT Id FROM Account WHERE Name='Test Acct 1'];
+        System.assert(String.isEmpty(td.whoId));
 
-    ACSFCCP_CallInformationController.TaskDetails td = ACSFCCP_CallInformationController.getTaskDetails(a.Id);
+        System.assert(String.isEmpty(td.whatId));
+    }
 
-    System.assert(!String.isEmpty(td.whatId));
-  }
+    @isTest
+    static void getTaskDetailsForAccount() {
+        Account a = [SELECT Id FROM Account WHERE Name='Test Acct 1'];
 
-  @isTest
-  static void getTaskDetailsForContact() {
-    Contact c = [SELECT Id FROM Contact WHERE LastName='Test'];
+        ACSFCCP_CallInformationController.TaskDetails td = ACSFCCP_CallInformationController.getTaskDetails(a.Id);
 
-    ACSFCCP_CallInformationController.TaskDetails td = ACSFCCP_CallInformationController.getTaskDetails(c.Id);
+        System.assert(!String.isEmpty(td.whatId));
+    }
 
-    System.assert(!String.isEmpty(td.whoId));
-  }
+    @isTest
+    static void getTaskDetailsForContact() {
+        Contact c = [SELECT Id FROM Contact WHERE LastName='Test'];
 
-  @isTest
-  static void getTaskDetailsForLead() {
-    Lead l = [SELECT Id FROM Lead WHERE LastName='Test'];
+        ACSFCCP_CallInformationController.TaskDetails td = ACSFCCP_CallInformationController.getTaskDetails(c.Id);
 
-    ACSFCCP_CallInformationController.TaskDetails td = ACSFCCP_CallInformationController.getTaskDetails(l.Id);
+        System.assert(!String.isEmpty(td.whoId));
+    }
 
-    System.assert(!String.isEmpty(td.whoId));
-  }
+    @isTest
+    static void getTaskDetailsForLead() {
+        Lead l = [SELECT Id FROM Lead WHERE LastName='Test'];
 
-  @isTest
-  static void testGetServicePresenceStatuses() {
+        ACSFCCP_CallInformationController.TaskDetails td = ACSFCCP_CallInformationController.getTaskDetails(l.Id);
 
-    Object result = ACSFCCP_CallInformationController.getServicePresenceStatuses();
-    System.assert(result != null);
+        System.assert(!String.isEmpty(td.whoId));
+    }
 
-    ACSFCCP_CallInformationController.ServicePresenceStatusHolder spsh = new ACSFCCP_CallInformationController.ServicePresenceStatusHolder();
-    spsh.id = 'A';
-    spsh.masterLabel = 'A';
-    spsh.developerName = 'A';
+    @isTest
+    static void testGetServicePresenceStatuses() {
 
-    System.assertEquals(spsh.id, 'A');
-    System.assertEquals(spsh.masterLabel, 'A');
-    System.assertEquals(spsh.developerName, 'A');
-  }
+        Object result = ACSFCCP_CallInformationController.getServicePresenceStatuses();
+        System.assert(result != null);
+
+        ACSFCCP_CallInformationController.ServicePresenceStatusHolder spsh = new ACSFCCP_CallInformationController.ServicePresenceStatusHolder();
+        spsh.id = 'A';
+        spsh.masterLabel = 'A';
+        spsh.developerName = 'A';
+
+        System.assertEquals(spsh.id, 'A');
+        System.assertEquals(spsh.masterLabel, 'A');
+        System.assertEquals(spsh.developerName, 'A');
+    }
 }

@@ -194,7 +194,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
         var connectAutoLogin = 0;
 
         var loadACSFIntegration = function () {
-          ctx.ACSFIntegration.OmniPresenceSync.onAgentHandler("{!namespaceClassPrefix}");
+          ctx.ACSFIntegration.OmniPresenceSync.onAgentHandler("{!namespaceClassPrefix}", ccSettings);
           ctx.ACSFIntegration.CallAttributesDisplay.onAgentHandler();
           ctx.ACSFIntegration.CallInformation.onAgentHandler("{!namespaceClassPrefix}");
           ctx.ACSFIntegration.CallTask.onAgentHandler("{!namespacePagePrefix}", "{!$Label.ACSFCCP_CallActivityTabName}", ccSettings);

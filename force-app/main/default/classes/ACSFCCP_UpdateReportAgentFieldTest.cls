@@ -34,8 +34,8 @@ private class ACSFCCP_UpdateReportAgentFieldTest {
 
   @isTest static void testUserAssignment() {
     List<ACSFCCP_HistoricalReportData__c> newRecords = new List<ACSFCCP_HistoricalReportData__c> {
-      new ACSFCCP_HistoricalReportData__c( Type__c = 'Queue', AC_Object_Name__c = 'Queue ABC'),
-      new ACSFCCP_HistoricalReportData__c( Type__c = 'Agent', AC_Object_Name__c = 'john.smith')
+      new ACSFCCP_HistoricalReportData__c( Type__c = 'Queue', AC_Object_Name__c = 'Queue ABC', AC_Record_Id__c = generateUUID()),
+      new ACSFCCP_HistoricalReportData__c( Type__c = 'Agent', AC_Object_Name__c = 'john.smith', AC_Record_Id__c = generateUUID())
     };
 
     System.assertEquals(0, [SELECT Type__c, AC_Object_Name__c, Agent__c FROM ACSFCCP_HistoricalReportData__c].size());
@@ -51,6 +51,13 @@ private class ACSFCCP_UpdateReportAgentFieldTest {
 
     ACSFCCP_HistoricalReportData__c queueRecord = [SELECT Type__c, AC_Object_Name__c, Agent__c FROM ACSFCCP_HistoricalReportData__c WHERE Type__c = 'Queue'];
     System.assert(String.isBlank(queueRecord.Agent__c));
+  }
+
+  private static String generateUUID() {
+    Blob b = Crypto.GenerateAESKey(128);
+    String h = EncodingUtil.ConvertTohex(b);
+
+    return h.SubString(0,8)+ '-' + h.SubString(8,12) + '-' + h.SubString(12,16) + '-' + h.SubString(16,20) + '-' + h.substring(20);
   }
 
   private static void createUser(String lastName, String connectUserName) {

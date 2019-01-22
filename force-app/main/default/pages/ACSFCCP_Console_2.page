@@ -214,7 +214,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
               ctx.ACSFIntegration.CallAttributesDisplay.onAgentHandler();
               ctx.ACSFIntegration.CallInformation.onAgentHandler("{!namespaceClassPrefix}");
               ctx.ACSFIntegration.CallTask.onAgentHandler("{!namespacePagePrefix}", "{!$Label.ACSFCCP_CallActivityTabName}", ccSettings);
-              ctx.ACSFIntegration.OmniPresenceSync.onAgentHandler("{!namespacePagePrefix}");
+              ctx.ACSFIntegration.OmniPresenceSync.onAgentHandler("{!namespacePagePrefix}", ccSettings);
               ctx.ACSFIntegration.AutoCallCampaign.onAgentHandler(ccSettings);
             }
 

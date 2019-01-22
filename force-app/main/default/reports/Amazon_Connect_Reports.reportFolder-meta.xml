@@ -2,7 +2,7 @@
 <ReportFolder xmlns="http://soap.sforce.com/2006/04/metadata">
     <folderShares>
         <accessLevel>Manage</accessLevel>
-        <sharedTo>acsfdcpreprod@gmail.com</sharedTo>
+        <sharedTo>lily-salesforce@amazon.com</sharedTo>
         <sharedToType>User</sharedToType>
     </folderShares>
     <name>Amazon Connect Reports</name>

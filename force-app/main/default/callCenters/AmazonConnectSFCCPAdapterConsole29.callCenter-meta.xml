@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CallCenter xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <adapterUrl>/apex/ACSFCCP_Lightning_2</adapterUrl>
-    <customSettings>{&quot;reqSoftphoneHeight&quot;:&quot;400&quot;,&quot;reqUseApi&quot;:&quot;true&quot;,&quot;reqSoftphoneWidth&quot;:&quot;250&quot;,&quot;reqSalesforceCompatibilityMode&quot;:&quot;Lightning&quot;}</customSettings>
-    <displayName>Amazon Connect CCP Adapter Lightning</displayName>
+    <adapterUrl>/apex/amazonconnect__ACSFCCP_Console_2</adapterUrl>
+    <customSettings>{&quot;reqSoftphoneHeight&quot;:&quot;400&quot;,&quot;reqUseApi&quot;:&quot;true&quot;,&quot;reqSoftphoneWidth&quot;:&quot;250&quot;,&quot;reqSalesforceCompatibilityMode&quot;:&quot;Classic&quot;}</customSettings>
+    <displayName>Amazon Connect CCP Adapter Console 2.9</displayName>
     <displayNameLabel>Display Name</displayNameLabel>
     <internalNameLabel>Internal Name</internalNameLabel>
     <sections>
@@ -14,7 +14,7 @@
         <items>
             <label>CTI Adapter URL</label>
             <name>reqAdapterUrl</name>
-            <value>/apex/ACSFCCP_Lightning_2</value>
+            <value>/apex/amazonconnect__ACSFCCP_Console_2</value>
         </items>
         <items>
             <label>Use CTI API</label>
@@ -29,12 +29,12 @@
         <items>
             <label>Softphone Width</label>
             <name>reqSoftphoneWidth</name>
-            <value>250</value>
+            <value>325</value>
         </items>
         <items>
             <label>Salesforce Compatibility Mode</label>
             <name>reqSalesforceCompatibilityMode</name>
-            <value>Lightning</value>
+            <value>Classic</value>
         </items>
         <label>Amazon Connect Salesforce CCP Adapter</label>
         <name>reqGeneralInfo</name>
@@ -43,7 +43,7 @@
         <items>
             <label>Amazon Connect CCP URL</label>
             <name>reqConnectURL</name>
-            <value>https://wfamzsfdc.awsapps.com/connect/ccp</value>
+            <value>https://yourinstancename.awsapps.com/connect/ccp</value>
         </items>
         <items>
             <label>Amazon Connect CCP SSO URL</label>
@@ -143,6 +143,11 @@
         <items>
             <label>Call Activity Include Agent Friendy Name</label>
             <name>reqTaskIncludeAgentFriendlyName</name>
+            <value>true</value>
+        </items>
+     <items>
+            <label>Omnipresence Agent State Sync Enabled</label>
+            <name>reqAgentStateSyncEnabled</name>
             <value>true</value>
         </items>
         <label>Amazon Connect Information</label>
